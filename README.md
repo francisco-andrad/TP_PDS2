@@ -100,3 +100,8 @@ Responsabilidades:
 
     Comprar: iterator -> void: retira uma passagem (econômica ou executiva) do banco de dados do voo 
                                selecionado e registra a compra no usuário.
+
+
+
+
+        testejsdhg qjsdh açsjdhkf asdhgfóq
