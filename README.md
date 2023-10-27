@@ -99,6 +99,11 @@ Responsabilidades:
     Inicializar: file -> void: Lê as informações do banco de dados e as insere na lista.
 
     Comprar: iterator -> void: retira uma passagem (econômica ou executiva) do banco de dados do voo 
-                               selecionado e registra a compra no usuário. 
+                               selecionado e registra a compra no usuário.
+
+    salve salve galera
+
+
+
 
     
