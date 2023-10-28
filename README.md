@@ -102,8 +102,6 @@ necessário.
                   buscar. (avaliação, capacidade dos quartos, etc.)
 
 
-                        ///////////////////////////////////////////////
-
 
 Classe: Usuário 
 
@@ -125,8 +123,7 @@ Responsabilidades:
 
 Colaborações: FILE*; (?)
 
-                           ///////////////////////////////////////////
-
+                    
 
 Classe: ListaDeVoos (Lista de passagens disponíveis)
 
@@ -150,9 +147,7 @@ Responsabilidades:
 
 Colaborações: std::list;
 
-
-                            /////////////////////////////////////////////
-
+ 
 
 Classe: ListaDeHoteis (lista de hotéis disponíveis)
 
@@ -180,9 +175,7 @@ Responsabilidades:
             
 Colaborações: std::list;
 
-
-
-                            ////////////////////////////////////////////////// 
+  
 
             
 Classe: Interface (Responsável por facilitar a interação com o usuário. Ainda não temos certeza se essa 
