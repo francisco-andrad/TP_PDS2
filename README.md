@@ -106,10 +106,14 @@ necessário.
 Classe: Usuário 
 
 Responsabilidades:
+
     Construtor: cria um usuário vazio.
     
     Login: string, string -> FILE* : recebe o nome e a senha de um usuário, abre o arquivo do respectivo usuário,
                                      e retorna o ponteiro para esse arquivo.
+
+    AdicionarCreditos: float, Usuario -> void: adiciona créditos (fictícios) ao usuário para que ele possa realizar
+                                         as transações.
 
     RegistrarCompraPassagem: Voo, FILE* -> void: registra a compra de uma passagem no arquivo do usuário.
 
@@ -186,6 +190,19 @@ Responsabilidades:
     
     Construtor: cria uma interface.
 
-    ???
+    ExibirData: vector -> void: exibe a data atual.
+
+    ExibirUsuario Usuario -> void: exibe o usuário que está logado.
+
+    AlterarData: vector -> vector: altera a data atual. (avança no tempo para fins de teste e avaliação do trabalho)
+ 
+Colaborações: std::vector
+
+
+
+
+
+
+
 
  
