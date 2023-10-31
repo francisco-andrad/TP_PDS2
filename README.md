@@ -167,10 +167,10 @@ Struct utilizada na classe:
         double preco_executiva;
         int assentos_economica;
         int assentos_executiva;
-    }`
+    }
 
 (Haverá também na classe ListaDeVoos um método que retorna cada atributo da struct Voo e a lista de voos, 
-respeitando assim o princípio do encapsulamento.)
+respeitando assim o princípio do encapsulamento.)`
 
 
 
@@ -217,10 +217,10 @@ Struct utilizada na classe:
         double preco2;
         double preco3;
         double preco4;
-    }`
+    }
 
 (Haverá também na classe ListaDeHoteis um método que retorna cada atributo da struct Hotel e a lista de hotéis, 
-respeitando assim o princípio do encapsulamento.)
+respeitando assim o princípio do encapsulamento.)`
   
 
             
