@@ -1,6 +1,4 @@
 # TP_PDS2
-Sistema de reserva de hotéis e passagens
-
 **Sistema de Reserva de Passagens/Hotel**
 
 *Descrição do Projeto:*
@@ -91,12 +89,103 @@ necessário.
 
 **CARTÕES CRC**
 
-Classe: TicketsList (Lista de passagens disponíveis)
+*Tipos definidos pelos desenvolvedores: (para facilitar a compreensão do leitor)*
+
+    Hotel: tipo que armazena os atributos individuais do hotel. (localização, avaliação, etc.)
+
+    Voo: tipo que armazena os atributos individuais do voo. (origem, destino, etc.)
+
+    FiltrosVoo: tipo para armazenar as preferencias do usuário com relação aos voos na hora de
+                 buscar. (companhia aérea, duração, etc.)
+
+    FiltrosHotel: tipo para armazenar as preferencias do usuário com relação aos hotés na hora de
+                  buscar. (avaliação, capacidade dos quartos, etc.)
+
+
+
+Classe: Usuário 
 
 Responsabilidades:
-    Construtor: constrói uma lista de passagens
+    Construtor: cria um usuário vazio.
+    
+    Login: string, string -> FILE* : recebe o nome e a senha de um usuário, abre o arquivo do respectivo usuário,
+                                     e retorna o ponteiro para esse arquivo.
 
-    Inicializar: file -> void: Lê as informações do banco de dados e as insere na lista.
+    RegistrarCompraPassagem: Voo, FILE* -> void: registra a compra de uma passagem no arquivo do usuário.
 
-    Comprar: iterator -> void: retira uma passagem (econômica ou executiva) do banco de dados do voo 
-                               selecionado e registra a compra no usuário.
+    RegistrarReservaHotel: Hotel, FILE* -> void: regisra a reserva de um ou mais quartos no hotel.
+
+    ReembolsarCompraPassagem: Voo, FILE* -> void: remove do arquivo do usuário o registro de determinado voo.
+
+    ReembolsarReservaHotel: Hotel, FILE* -> void: remove do arquivo do usuário o registro de determinada reserva.
+
+    Logoff: FILE* -> void: escreve todos os dados no arquivo permanente do usuário e fecha o arquivo.
+
+Colaborações: FILE*; (?)
+
+                    
+
+Classe: ListaDeVoos (Lista de passagens disponíveis)
+
+Responsabilidades:
+
+    Construtor: constrói uma lista de passagens.
+
+    Inicializar: FILE -> void: Lê as informações do banco de dados e as insere na lista de voos.
+
+    Buscar: string, FiltrosVoo -> iterator: Encontra uma voo de acordo com as necessidades do usuário e retorna um 
+                                         iterador para o voo encontrado
+    
+    Comprar: iterator, Usuário -> void: retira uma passagem (econômica ou executiva) do banco de dados do voo 
+                                        selecionado e registra a compra no usuário.
+    
+    Reembolsar: iterator, Usuário -> void: Cancela a compra no usuário e retorna a passagem para os dados do voo.
+
+    Avaliar:  iterator, Usuário, float -> void: Permite que o usuário avalie um voo.
+
+    Fechar: FILE* -> void: Registra as informações no arquivo de dados permanente e fecha o arquivo.
+
+Colaborações: std::list;
+
+ 
+
+Classe: ListaDeHoteis (lista de hotéis disponíveis)
+
+Responsabilidades:
+        
+    Construtor: Constroi uma lista de hotéis.
+
+    Inicializar: FILE -> void: Lê as informações do banco de dados e as insere na lista de hotéis.
+
+    Buscar: string, FiltrosHotel -> iterator: Encontra um hotél de acordo com as necessidades do usuário e 
+                                         retorna um iterador para o hotél encontrado.
+
+    ConsultarCalendário: string -> bool: Verifica se há vagas disponíveis na data pesquisada pelo usuário.
+
+    Reservar: string, iterator, Usuário -> void: Se houver vagas disponíveis, realiza a reserva, ou seja: reduz
+                                                 o número de vagas disponíveis do hotel na data especificada e registra
+                                                 a reserva no usuário.
+
+    Reembolsar iterator, Usuário -> void: Remove a reserva do usuário e aumenta o número de vagas disponíveis no hotel 
+                                          na data da reserva.
+
+    Avaliar: iterator, Usuário, float -> void: Permite que um usuário avalie um hotél.
+
+    Fechar: FILE* -> void: Registra as informações no arquivo de dados permanente e fecha o arquivo.
+            
+Colaborações: std::list;
+
+  
+
+            
+Classe: Interface (Responsável por facilitar a interação com o usuário. Ainda não temos certeza se essa 
+                  classe é realmente necessária, pois sua responsabilidade pode ser cumprida na função main
+                  ou em outra função.)
+
+Responsabilidades:
+    
+    Construtor: cria uma interface.
+
+    ???
+
+ 
