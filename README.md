@@ -83,7 +83,8 @@ possa realizar uma busca mesmo com poucos filtros.
 hotéis que consiga utilizar um calendário. Nos parece extremamente complexo implementar um sistema 
 que consiga armazenar qual a quantidade de quartos disponíveis em cada hotel em cada dia do calendário 
 e modificar esses dados de acordo com a reserva. Para o sistema de compra de passagens, isso não é 
-necessário.
+necessário. (Solução atual: utilizar um vetor para cada tipo de quarto que armazene o número de quartos 
+disponíveis.)
 
 
 
@@ -143,15 +144,35 @@ Responsabilidades:
     Comprar: iterator, Usuário -> void: retira uma passagem (econômica ou executiva) do banco de dados do voo 
                                         selecionado e registra a compra no usuário.
     
-    Reembolsar: iterator, Usuário -> void: Cancela a compra no usuário e retorna a passagem para os dados do voo.
+    CancelarCompra: iterator, Usuário -> void: Cancela a compra no usuário e retorna a passagem para os dados do voo.
 
-    Avaliar:  iterator, Usuário, float -> void: Permite que o usuário avalie um voo.
+    /*Avaliar:  iterator, Usuário, float -> void: Permite que o usuário avalie um voo.*/
 
     Fechar: FILE* -> void: Registra as informações no arquivo de dados permanente e fecha o arquivo.
 
 Colaborações: std::list;
 
- 
+Struct utilizada na classe:
+
+    `struct Voo {
+        string numero;
+        string origem;
+        string destino;
+        string data_partida;
+        string hora_partida;
+        string data_chegada;
+        string hora_chegada;
+        string companhia;
+        double preco_economica;
+        double preco_executiva;
+        int assentos_economica;
+        int assentos_executiva;
+    }
+
+(Haverá também na classe ListaDeVoos um método que retorna cada atributo da struct Voo e a lista de voos, 
+respeitando assim o princípio do encapsulamento.)`
+
+
 
 Classe: ListaDeHoteis (lista de hotéis disponíveis)
 
@@ -170,15 +191,36 @@ Responsabilidades:
                                                  o número de vagas disponíveis do hotel na data especificada e registra
                                                  a reserva no usuário.
 
-    Reembolsar iterator, Usuário -> void: Remove a reserva do usuário e aumenta o número de vagas disponíveis no hotel 
-                                          na data da reserva.
+    CancelarReserva: iterator, Usuário -> void: Remove a reserva do usuário e aumenta o número de vagas disponíveis no hotel 
+                                                na data da reserva.
 
-    Avaliar: iterator, Usuário, float -> void: Permite que um usuário avalie um hotél.
+    /*Avaliar: iterator, Usuário, float -> void: Permite que um usuário avalie um hotél.*/
 
     Fechar: FILE* -> void: Registra as informações no arquivo de dados permanente e fecha o arquivo.
             
 Colaborações: std::list;
 
+Struct utilizada na classe:
+
+    `struct Hotel {
+        string nome;
+        string local;
+        int estrelas;
+      //int avaliacoes; ?
+        bool cafe;
+        bool almoco;
+        bool jantar;
+        bool piscina;
+        int quartos2[365];
+        int quartos3[365];
+        int quartos4[365];
+        double preco2;
+        double preco3;
+        double preco4;
+    }
+
+(Haverá também na classe ListaDeHoteis um método que retorna cada atributo da struct Hotel e a lista de hotéis, 
+respeitando assim o princípio do encapsulamento.)`
   
 
             
