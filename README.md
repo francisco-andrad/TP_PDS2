@@ -126,9 +126,17 @@ Responsabilidades:
 
     Logoff: FILE* -> void: escreve todos os dados no arquivo permanente do usuário e fecha o arquivo.
 
-Colaborações: FILE*; (?)
+Colaborações: std::string; std::vector; (?)
 
-                    
+Dados privados da classe:
+
+    string nome;
+    string senha;
+    float creditos;
+    vector<Hotel> reservas;
+    vector<Voo> passagens;
+
+
 
 Classe: ListaDeVoos (Lista de passagens disponíveis)
 
@@ -206,7 +214,7 @@ Struct utilizada na classe:
         string nome;
         string local;
         int estrelas;
-      //int avaliacoes; ?
+        float avaliacoes; 
         bool cafe;
         bool almoco;
         bool jantar;
