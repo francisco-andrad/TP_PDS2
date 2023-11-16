@@ -1,24 +1,8 @@
-// #include "Usuario.h"
+#include "Usuario.h"
 #include <list>
 #include <string>
 
 using namespace std;
-
-struct Voo
-{
-    string numero;
-    string origem;
-    string destino;
-    string data_partida;
-    string hora_partida;
-    string data_chegada;
-    string hora_chegada;
-    string companhia;
-    float preco_economica;
-    float preco_executiva;
-    int assentos_economica;
-    int assentos_executiva;
-};
 
 struct FiltrosVoo
 {

@@ -1,26 +1,8 @@
-// #include "Usuario.h"
+#include "Usuario.h"
 #include <list>
 #include <string>
 
 using namespace std;
-
-struct Hotel
-{
-    string nome;
-    string local;
-    int estrelas;
-    float avaliacoes;
-    bool cafe;
-    bool almoco;
-    bool jantar;
-    bool piscina;
-    int quartos2[365];
-    int quartos3[365];
-    int quartos4[365];
-    double preco2;
-    double preco3;
-    double preco4;
-};
 
 struct FiltrosHotel
 {
@@ -49,14 +31,14 @@ class ListaDeHoteis
     // verifica se há disponibilidade na data desejada pelo usuário
     // (nós) no README ficou faltando a iterator
     // (nós) sugiro mudar o nome do método para disponibilidade
-    bool ConsultarCalendário(string data, list<Hotel>::iterator it);
+    bool ConsultarCalendario(string data, list<Hotel>::iterator it);
 
     // realiza a reserva, ou seja, diminui o número de vagas disponiveis
     // no periodo desejado e reduz a quantidade de créditos que o usuário
     // possui
     // pensar(nós) situação análoga à classe ListaDeVoos, nesse caso,
     // precisa de um método buscar que busque pelo nome
-    void Reservar(string data_inicio, string data_fim, list<Hotel>::iterator it, Usuário user);
+    void Reservar(string data_inicio, string data_fim, list<Hotel>::iterator it, Usuario user);
 
     // cancela a reserva, ou seja, reestabelece o número de vagas disponíveis
     // e devolve os créditos ao usuário

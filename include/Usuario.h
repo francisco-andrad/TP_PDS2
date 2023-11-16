@@ -1,9 +1,41 @@
-#include "ListaDeHoteis.h"
-#include "ListaDeVoos.h"
 #include <string>
 #include <vector>
 
 using namespace std;
+
+struct Voo
+{
+    string numero;
+    string origem;
+    string destino;
+    string data_partida;
+    string hora_partida;
+    string data_chegada;
+    string hora_chegada;
+    string companhia;
+    float preco_economica;
+    float preco_executiva;
+    int assentos_economica;
+    int assentos_executiva;
+};
+
+struct Hotel
+{
+    string nome;
+    string local;
+    int estrelas;
+    float avaliacoes;
+    bool cafe;
+    bool almoco;
+    bool jantar;
+    bool piscina;
+    int quartos2[365];
+    int quartos3[365];
+    int quartos4[365];
+    double preco2;
+    double preco3;
+    double preco4;
+};
 
 class Usuario
 {
