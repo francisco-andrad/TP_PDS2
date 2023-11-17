@@ -111,7 +111,7 @@ Responsabilidades:
     Construtor: cria um usuário vazio.
     
     Login: string, string -> FILE* : recebe o nome e a senha de um usuário, abre o arquivo do respectivo usuário,
-                                     e retorna o ponteiro para esse arquivo.
+                                     e retorna o ponteiro para esse arquivo. (?)
 
     AdicionarCreditos: float, Usuario -> void: adiciona créditos (fictícios) ao usuário para que ele possa realizar
                                          as transações.
