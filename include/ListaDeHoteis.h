@@ -6,14 +6,16 @@ using namespace std;
 
 struct FiltrosHotel
 {
+    string nome;
+    string local;
     int estrelas;
     float avaliacoes;
     bool cafe;
     bool almoco;
     bool jantar;
-    bool quartos2;
-    bool quartos3;
-    bool quartos4;
+    int quartos2;
+    int quartos3;
+    int quartos4;
 };
 
 class ListaDeHoteis
