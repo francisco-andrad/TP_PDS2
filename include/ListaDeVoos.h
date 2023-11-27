@@ -1,3 +1,6 @@
+#ifndef LISTADEVOOS_H
+#define LISTADEVOOS_H
+
 #include "Usuario.h"
 #include <list>
 #include <string>
@@ -49,3 +52,5 @@ class ListaDeVoos
   private:
     list<Voo> lista_;
 };
+
+#endif
