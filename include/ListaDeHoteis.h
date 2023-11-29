@@ -10,6 +10,8 @@ using namespace std;
 
 struct FiltrosHotel
 {
+    string nome;
+    string local;
     int estrelas;
     float avaliacoes;
     bool cafe;
