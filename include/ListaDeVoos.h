@@ -31,7 +31,7 @@ class ListaDeVoos
     void Inicializar();
 
     // encontra um voo de acordo com as necessidades do usuário
-    list<Voo>::iterator Buscar(string origem, string destino, FiltrosVoo filtros);
+    list<Voo>::iterator Buscar(FiltrosVoo filtros);
 
     // efetua a compra, ou seja, diminui a quantidade de assentos disponiveis no
     // voo e diminui a quantidade de créditos que o usuário possui
@@ -50,7 +50,7 @@ class ListaDeVoos
     void Avaliar(list<Voo>::iterator it, Usuario user, float avaliacao);
 
     // registra os dados no arquivo permanente e fecha o arquivo
-    void Fechar(FILE *arq);
+    void Fechar();
 
   private:
     list<Voo> lista_;

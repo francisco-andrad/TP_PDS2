@@ -32,19 +32,19 @@ class ListaDeHoteis
     void Inicializar();
 
     // Encontra um hotel de acordo com as preferências do usuário
-    list<Hotel>::iterator Buscar(string local, FiltrosHotel filtros);
+    list<Hotel>::iterator Buscar(FiltrosHotel filtros);
 
     // verifica se há disponibilidade na data desejada pelo usuário
     // (nós) no README ficou faltando a iterator
     // (nós) sugiro mudar o nome do método para disponibilidade
-    bool ConsultarCalendario(string data, list<Hotel>::iterator it, int pessoas);
+    bool ConsultarCalendario(int dia, int mes, list<Hotel>::iterator it, int pessoas);
 
     // realiza a reserva, ou seja, diminui o número de vagas disponiveis
     // no periodo desejado e reduz a quantidade de créditos que o usuário
     // possui
     // pensar(nós) situação análoga à classe ListaDeVoos, nesse caso,
     // precisa de um método buscar que busque pelo nome
-    void Reservar(string data_inicio, string data_fim, list<Hotel>::iterator it, Usuario user);
+    void Reservar(string data_inicio, string data_fim, list<Hotel>::iterator it, Usuario user, int pessoas);
 
     // cancela a reserva, ou seja, reestabelece o número de vagas disponíveis
     // e devolve os créditos ao usuário
@@ -54,7 +54,7 @@ class ListaDeHoteis
     void Avaliar(list<Hotel>::iterator it, Usuario user, float avaliacao);
 
     // grava as informações no arquivo permanente e fecha o arquivo
-    void Fechar(FILE *arq);
+    void Fechar();
 
   private:
     list<Hotel> lista_;
