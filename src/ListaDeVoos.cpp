@@ -13,7 +13,8 @@ void ListaDeVoos::Inicializar()
     arquivo_.open("data/Voos.txt", ios::in);
     if (!arquivo_.is_open())
     {
-        // TODO: throw excessão
+        ExcecaoErroArquivoVoos e;
+        throw e;
     }
     string buffer;
     Voo aux_leitura;
@@ -107,7 +108,8 @@ void ListaDeVoos::Fechar(FILE *arq)
     arquivo_.open("data/Voos.txt", ios::out);
     if (!arquivo_.is_open())
     {
-        // TODO: throw excessão
+        ExcecaoErroArquivoVoos e;
+        throw e;
     }
     for (Voo x : lista_)
     {

@@ -57,4 +57,7 @@ class ListaDeVoos
     fstream arquivo_;
 };
 
+struct ExcecaoErroArquivoVoos {
+};
+
 #endif

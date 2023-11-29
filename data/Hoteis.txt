@@ -5,14 +5,15 @@ Belo Horizonte
 1
 1
 1
-45
-30
-15
+1
+//Número de quartos em cada dia
+
 
 Hotel Verde Green
 Rio de Janeiro
 4
 4.78
+1
 1
 1
 1
@@ -27,6 +28,7 @@ Rio de Janeiro
 1
 0
 0
+0
 30
 20
 0
@@ -38,6 +40,7 @@ Rio de Janeiro
 1
 0
 0
+0
 20
 30
 40
@@ -46,6 +49,7 @@ Whyndam Garden
 São Paulo
 5
 4.89
+1
 1
 1
 1
@@ -60,6 +64,7 @@ São Paulo
 1
 1
 0
+1
 30
 10
 0
@@ -70,6 +75,7 @@ São Paulo
 4.10
 1
 1
+0
 0
 30
 10
@@ -82,6 +88,7 @@ Belo Horizonte
 1
 1
 0
+1
 25
 10
 0
@@ -93,6 +100,7 @@ João Pessoa
 1
 1
 1
+1
 40
 20
 5
@@ -101,6 +109,7 @@ Hotel Dorme
 Belo Horizonte
 2
 3.50
+0
 0
 0
 0

@@ -5,6 +5,7 @@ using namespace std;
 
 int main(void)
 {
+    try {
 
     Usuario jao;
     string nome;
@@ -28,4 +29,8 @@ int main(void)
     jao.RegistrarReservaHotel(h, di, df, p);
     jao.logoff();
     return 0;
+
+} catch (ExcecaoErroArquivoVoos e) {
+    cout << "Erro ao abrir o arquivo Voos.txt." << endl;
+}
 }
