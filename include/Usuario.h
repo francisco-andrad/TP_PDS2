@@ -1,5 +1,9 @@
+#ifndef USUARIO_H
+#define USUARIO_H
+
+#include <fstream>
+#include <list>
 #include <string>
-#include <vector>
 
 using namespace std;
 
@@ -50,26 +54,32 @@ class Usuario
     void AdicionarCreditos(float creditos);
 
     // registra a compra de uma passagem feita pelo usuário
-    void RegistrarCompraPassagem(FILE *usu_arq, Voo voo);
+    void RegistrarCompraPassagem(Voo voo, float preco);
 
     // registra a reserva de um hotél feita pelo usuário
-    void RegistrarReservaHotel(FILE *usu_arq, Hotel hotel);
+    void RegistrarReservaHotel(Hotel hotel, string data_chegada, string data_partida, float preco);
 
     // remove do arquivo do usuário o registro de determinado voo e
     // devolve os créditos gastos
-    void ReembolsarCompraPassagem(FILE *usu_arq, Voo voo);
+    void ReembolsarCompraPassagem(Voo voo, float preco);
 
     // remove do arquivo do ususário o registro de determinada reserva e
     // devosve os créditos gastos
-    void ReembolsarReservaHotel(FILE *usu_arq, Hotel hotel);
+    void ReembolsarReservaHotel(Hotel hotel, string data_chegada, string data_partida, float preco);
 
-    // escreve os dados no arquivo permanente do usuário e fecha o arquivo
-    void logoff(FILE *usu_arq);
+    // retorna a quantidade de créditos disponiveis
+    float creditos();
+
+    // escreve os   dados no arquivo permanente do usuário e fecha o arquivo
+    void logoff();
 
   private:
     string nome_;
     string senha_;
     float creditos_;
-    vector<Hotel> reservas_;
-    vector<Voo> passagens_;
+    list<string> hoteis_;
+    list<string> passagens_;
+    fstream arquivo_;
 };
+
+#endif

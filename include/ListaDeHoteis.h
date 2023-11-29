@@ -1,3 +1,6 @@
+#ifndef LISTADEHOTEIS_H
+#define LISTADEHOTEIS_H
+
 #include "Usuario.h"
 #include <list>
 #include <string>
@@ -55,3 +58,5 @@ class ListaDeHoteis
   private:
     list<Hotel> lista_;
 };
+
+#endif
