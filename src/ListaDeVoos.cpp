@@ -43,6 +43,7 @@ void ListaDeVoos::Inicializar()
         getline(arquivo_, buffer);
         aux_leitura.assentos_executiva = stoi(buffer);
         lista_.push_back(aux_leitura);
+        getline(arquivo_, buffer);
     }
     arquivo_.close();
 }
