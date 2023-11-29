@@ -4,6 +4,7 @@
 #include <fstream>
 #include <list>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -33,12 +34,12 @@ struct Hotel
     bool almoco;
     bool jantar;
     bool piscina;
-    int quartos2[365];
-    int quartos3[365];
-    int quartos4[365];
-    double preco2;
-    double preco3;
-    double preco4;
+    vector<vector<int>> quartos2;
+    vector<vector<int>> quartos3;
+    vector<vector<int>> quartos4;
+    float preco2;
+    float preco3;
+    float preco4;
 };
 
 class Usuario
@@ -54,17 +55,17 @@ class Usuario
     void AdicionarCreditos(float creditos);
 
     // registra a compra de uma passagem feita pelo usuário
-    void RegistrarCompraPassagem(Voo voo, float preco);
+    void RegistrarCompraPassagem(Voo voo, float preco, bool economica);
 
     // registra a reserva de um hotél feita pelo usuário
     void RegistrarReservaHotel(Hotel hotel, string data_chegada, string data_partida, float preco);
 
     // remove do arquivo do usuário o registro de determinado voo e
     // devolve os créditos gastos
-    void ReembolsarCompraPassagem(Voo voo, float preco);
+    void ReembolsarCompraPassagem(Voo voo, float preco, bool economica);
 
     // remove do arquivo do ususário o registro de determinada reserva e
-    // devosve os créditos gastos
+    // devolve os créditos gastos
     void ReembolsarReservaHotel(Hotel hotel, string data_chegada, string data_partida, float preco);
 
     // retorna a quantidade de créditos disponiveis

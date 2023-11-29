@@ -2,6 +2,7 @@
 #define LISTADEHOTEIS_H
 
 #include "Usuario.h"
+#include <fstream>
 #include <list>
 #include <string>
 
@@ -14,9 +15,9 @@ struct FiltrosHotel
     bool cafe;
     bool almoco;
     bool jantar;
-    bool quartos2;
-    bool quartos3;
-    bool quartos4;
+    int quartos2;
+    int quartos3;
+    int quartos4;
 };
 
 class ListaDeHoteis
@@ -26,7 +27,7 @@ class ListaDeHoteis
     ListaDeHoteis();
 
     // Lê os dados do arquivo e os coloca na lista de hotéis
-    void Inicializar(FILE *arq);
+    void Inicializar();
 
     // Encontra um hotel de acordo com as preferências do usuário
     list<Hotel>::iterator Buscar(string local, FiltrosHotel filtros);
@@ -34,7 +35,7 @@ class ListaDeHoteis
     // verifica se há disponibilidade na data desejada pelo usuário
     // (nós) no README ficou faltando a iterator
     // (nós) sugiro mudar o nome do método para disponibilidade
-    bool ConsultarCalendario(string data, list<Hotel>::iterator it);
+    bool ConsultarCalendario(string data, list<Hotel>::iterator it, int pessoas);
 
     // realiza a reserva, ou seja, diminui o número de vagas disponiveis
     // no periodo desejado e reduz a quantidade de créditos que o usuário
@@ -55,6 +56,7 @@ class ListaDeHoteis
 
   private:
     list<Hotel> lista_;
+    fstream arquivo_;
 };
 
 #endif

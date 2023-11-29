@@ -9,7 +9,7 @@ Usuario::Usuario()
 
 void Usuario::login(string nome, string senha)
 {
-    string aux_abrir = nome + ".txt";
+    string aux_abrir = "data/" + nome + ".txt";
     arquivo_.open(aux_abrir, ios::in);
     if (arquivo_.is_open())
     {
@@ -49,10 +49,13 @@ void Usuario::login(string nome, string senha)
     }
     else
     {
-        aux_abrir = nome + ".txt";
+        aux_abrir = "data/" + nome + ".txt";
         arquivo_.open(aux_abrir, ios::out);
         arquivo_ << senha << endl;
+        nome_ = nome;
         senha_ = senha;
+        creditos_ = 0.0;
+
         arquivo_.close();
     }
 }
@@ -67,11 +70,17 @@ void Usuario::AdicionarCreditos(float creditos)
     creditos_ += creditos;
 }
 
-void Usuario::RegistrarCompraPassagem(Voo voo, float preco)
+void Usuario::RegistrarCompraPassagem(Voo voo, float preco, bool economica)
 {
     // o código que testa se o usuario tem creditos o suficiente
     // para realizar a transação vai ficar na classe ListaDeVoos
-    string aux_dados = "P" + voo.numero;
+    // TODO: talvez colocar "x" ou "c" para diferenciar economica e executiva
+    string aux_dados;
+    if (!economica)
+        aux_dados = "P" + voo.numero + "X";
+    else
+        aux_dados = "P" + voo.numero + "C";
+
     passagens_.push_back(aux_dados);
     creditos_ -= preco;
 }
@@ -85,9 +94,14 @@ void Usuario::RegistrarReservaHotel(Hotel hotel, string data_chegada, string dat
     creditos_ -= preco;
 }
 
-void Usuario::ReembolsarCompraPassagem(Voo voo, float preco)
+void Usuario::ReembolsarCompraPassagem(Voo voo, float preco, bool economica)
 {
-    string aux_dados = "P" + voo.numero;
+    // TODO: talvez colocar "x" ou "c" para diferenciar economica e executiva
+    string aux_dados;
+    if (!economica)
+        aux_dados = "P" + voo.numero + "X";
+    else
+        aux_dados = "P" + voo.numero + "E";
     passagens_.remove(aux_dados);
     creditos_ += preco;
 }
@@ -106,7 +120,7 @@ float Usuario::creditos()
 void Usuario::logoff()
 {
 
-    string aux_abrir = nome_ + ".txt";
+    string aux_abrir = "data/" + nome_ + ".txt";
     arquivo_.open(aux_abrir, ios::out);
     if (!arquivo_.is_open())
     {

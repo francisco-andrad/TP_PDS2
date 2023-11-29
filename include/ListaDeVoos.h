@@ -2,6 +2,7 @@
 #define LISTADEVOOS_H
 
 #include "Usuario.h"
+#include <fstream>
 #include <list>
 #include <string>
 
@@ -25,7 +26,7 @@ class ListaDeVoos
     ListaDeVoos();
 
     // Lê as informações do arquivo e as insere na lista
-    void Inicializar(FILE *arq);
+    void Inicializar();
 
     // encontra um voo de acordo com as necessidades do usuário
     list<Voo>::iterator Buscar(string origem, string destino, FiltrosVoo filtros);
@@ -37,11 +38,11 @@ class ListaDeVoos
     // vale para a função CancelarCompra e Avaliar.
     // nesse caso, teria que ter um método buscar que use o número do voo
     // como critério, cai na parte de polimorfismo
-    void Comprar(list<Voo>::iterator it, Usuario user);
+    void Comprar(list<Voo>::iterator it, Usuario user, bool economica);
 
     // cancela a compra, ou seja, reestabelece o número de assentos disponiveis no
     // voo e a quantidade de créditos que o usuário possui
-    void CancelarCompra(list<Voo>::iterator it, Usuario user);
+    void CancelarCompra(list<Voo>::iterator it, Usuario user, bool economica);
 
     // permite que o usuário avalie um voo
     void Avaliar(list<Voo>::iterator it, Usuario user, float avaliacao);
@@ -51,6 +52,7 @@ class ListaDeVoos
 
   private:
     list<Voo> lista_;
+    fstream arquivo_;
 };
 
 #endif
