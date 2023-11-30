@@ -13,8 +13,8 @@ void ListaDeVoos::Inicializar()
     arquivo_.open("data/Voos.txt", ios::in);
     if (!arquivo_.is_open())
     {
-        ExcecaoErroArquivoVoos e;
-        throw e;
+        ExcecaoErroArquivoVoos f;
+        throw f;
     }
     string buffer;
     Voo aux_leitura;
@@ -55,7 +55,7 @@ list<Voo>::iterator ListaDeVoos::Buscar(string origem, string destino, FiltrosVo
     for (it = lista_.begin(); it != lista_.end(); it++)
     {
         if ((it->origem == origem) && (it->destino == destino) && (it->data_partida == filtros.data_partida) &&
-            (it->data_chegada == filtros.data_chegada) && (it->companhia == filtros.companhia))
+            (it->data_chegada == filtros.hora_partida) && (it->companhia == filtros.companhia))
             return it;
     }
     if (it == lista_.end())
@@ -109,8 +109,8 @@ void ListaDeVoos::Fechar(FILE *arq)
     arquivo_.open("data/Voos.txt", ios::out);
     if (!arquivo_.is_open())
     {
-        ExcecaoErroArquivoVoos e;
-        throw e;
+        ExcecaoErroArquivoVoos f;
+        throw f;
     }
     for (Voo x : lista_)
     {

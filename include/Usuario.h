@@ -83,4 +83,7 @@ class Usuario
     fstream arquivo_;
 };
 
+struct ExcecaoOpcaoInvalida {
+};
+
 #endif
