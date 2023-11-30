@@ -61,4 +61,7 @@ class ListaDeHoteis
     fstream arquivo_;
 };
 
+struct ExcecaoErroArquivoHoteis {
+};
+
 #endif
