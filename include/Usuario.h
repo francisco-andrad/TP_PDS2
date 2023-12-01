@@ -2,6 +2,7 @@
 #define USUARIO_H
 
 #include <fstream>
+#include <iterator>
 #include <list>
 #include <string>
 #include <vector>
@@ -42,6 +43,12 @@ struct Hotel
     float preco4;
 };
 
+struct Data
+{
+    int dia;
+    int mes;
+};
+
 class Usuario
 {
   public:
@@ -58,7 +65,7 @@ class Usuario
     void RegistrarCompraPassagem(Voo voo, float preco, bool economica);
 
     // registra a reserva de um hotél feita pelo usuário
-    void RegistrarReservaHotel(Hotel hotel, string data_chegada, string data_partida, float preco);
+    void RegistrarReservaHotel(Hotel hotel, Data chegada, Data partida, float preco, int pessoas);
 
     // remove do arquivo do usuário o registro de determinado voo e
     // devolve os créditos gastos
@@ -66,7 +73,7 @@ class Usuario
 
     // remove do arquivo do ususário o registro de determinada reserva e
     // devolve os créditos gastos
-    void ReembolsarReservaHotel(Hotel hotel, string data_chegada, string data_partida, float preco);
+    void ReembolsarReservaHotel(Hotel hotel, Data chegada, Data partida, float preco, int pessoas);
 
     // retorna a quantidade de créditos disponiveis
     float creditos();
@@ -81,6 +88,10 @@ class Usuario
     list<string> hoteis_;
     list<string> passagens_;
     fstream arquivo_;
+};
+
+struct ExcecaoOpcaoInvalida
+{
 };
 
 #endif

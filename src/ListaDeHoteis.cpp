@@ -35,12 +35,14 @@ void ListaDeHoteis::Inicializar()
         aux_leitura.jantar = stoi(buffer);
         getline(arquivo_, buffer);
         aux_leitura.piscina = stoi(buffer);
+
+        // a partir daqui tem que alterar
         for (int i = 0; i < 12; i++)
         {
             getline(arquivo_, buffer);
             for (int j = 0; j < buffer.size(); j++)
             {
-                if (buffer[j] == ' ')
+                if (buffer[j] == ' ') // aqui
                 {
                     aux_leitura.quartos2[i].push_back(stoi(aux_data));
                     aux_data = "";
@@ -116,39 +118,274 @@ list<Hotel>::iterator ListaDeHoteis::Buscar(FiltrosHotel filtros)
 // recebam a data no formato de inteiro. A conersão de string para inteiro será feita
 // na função main no momento que o usuario digita a data.
 
-bool ListaDeHoteis::ConsultarCalendario(int dia, int mes, list<Hotel>::iterator it, int pessoas)
+bool ListaDeHoteis::ConsultarCalendario(Data d, list<Hotel>::iterator it, int pessoas)
 {
-    if ((pessoas == 2) && (it->quartos2[mes - 1][dia - 1] != 0))
+    if ((pessoas == 2) && (it->quartos2[d.mes - 1][d.dia - 1] != 0))
         return true;
-    if ((pessoas == 3) && (it->quartos3[mes - 1][dia - 1] != 0))
+    if ((pessoas == 3) && (it->quartos3[d.mes - 1][d.dia - 1] != 0))
         return true;
-    if ((pessoas == 4) && (it->quartos4[mes - 1][dia - 1] != 0))
+    if ((pessoas == 4) && (it->quartos4[d.mes - 1][d.dia - 1] != 0))
         return true;
     return false;
 }
 
-void ListaDeHoteis::Reservar(string data_inicio, string data_fim, list<Hotel>::iterator it, Usuario user, int pessoas)
+void ListaDeHoteis::Reservar(Data inicio, Data fim, list<Hotel>::iterator it, Usuario user, int pessoas)
 {
-    int dia_i = stoi(data_inicio.substr(0, 2));
-    int mes_i = stoi(data_inicio.substr(2, 2));
-    int dia_f = stoi(data_fim.substr(0, 2));
-    int mes_f = stoi(data_fim.substr(2, 2));
-
-    if (mes_i == mes_f)
+    if (((pessoas == 2) && (user.creditos() < it->preco2) || ((pessoas == 3) && (user.creditos() < it->preco3)) ||
+         ((pessoas == 4) && (user.creditos() < it->preco4))))
     {
-        for (int i = dia_i; i < dia_f + 1; i++)
+        // TODO: créditos insuficientes
+    }
+
+    if (inicio.mes == fim.mes)
+    {
+        Data aux;
+        aux.mes = inicio.mes;
+
+        // verifica a disponibilidade
+        for (int i = (inicio.dia - 1); i < fim.dia; i++)
         {
-            ConsultarCalendario(string data, list<Hotel>::iterator it, int pessoas)
+            aux.dia = i;
+            if (!ConsultarCalendario(aux, it, pessoas))
+            {
+                // TODO: não é possivel reservar pois não há vagas
+            }
+        }
+        if (pessoas == 2)
+        {
+            for (int i = (inicio.dia - 1); i < fim.dia; i++)
+            {
+                it->quartos2[(inicio.mes) - 1][i]--;
+            }
+            user.RegistrarReservaHotel(*(it), inicio, fim, it->preco2, pessoas);
+        }
+        if (pessoas == 3)
+        {
+            for (int i = (inicio.dia - 1); i < fim.dia; i++)
+            {
+                it->quartos3[(inicio.mes) - 1][i]--;
+            }
+            user.RegistrarReservaHotel(*(it), inicio, fim, it->preco3, pessoas);
+        }
+        if (pessoas == 4)
+        {
+            for (int i = (inicio.dia - 1); i < fim.dia; i++)
+            {
+                it->quartos4[(inicio.mes) - 1][i]--;
+            }
+            user.RegistrarReservaHotel(*(it), inicio, fim, it->preco4, pessoas);
+        }
+    }
+    else
+    {
+        Data aux;
+        aux.mes = inicio.mes;
+        // poderia ser qualquer quartox, o que importa é o mês
+        for (int i = (inicio.dia - 1); i < it->quartos2[aux.mes].size(); i++)
+        {
+            aux.dia = i;
+            if (!ConsultarCalendario(aux, it, pessoas))
+            {
+                // TODO: não há vagas
+            }
+        }
+        aux.mes++;
+        while (aux.mes < fim.mes)
+        {
+            for (int i = 0; i < it->quartos2[aux.mes].size(); i++)
+            {
+                aux.dia = i;
+                if (!ConsultarCalendario(aux, it, pessoas))
+                {
+                    // TODO: não há vagas
+                }
+            }
+            aux.mes++;
+        }
+        for (int i = 0; i < fim.dia; i++)
+        {
+            aux.dia = i;
+            if (!ConsultarCalendario(aux, it, pessoas))
+            {
+                // TODO: não há vagas
+            }
+        }
+        if (pessoas == 2)
+        {
+            aux.mes = inicio.mes;
+            for (int i = (inicio.dia - 1); i < it->quartos2[inicio.mes].size(); i++)
+            {
+                it->quartos2[(inicio.mes) - 1][i]--;
+            }
+            aux.mes++;
+            while (aux.mes < fim.mes)
+            {
+                for (int i = 0; i < it->quartos2[aux.mes].size(); i++)
+                {
+                    it->quartos2[(aux.mes) - 1][i]--;
+                }
+                aux.mes++;
+            }
+            for (int i = 0; i < fim.dia; i++)
+            {
+                it->quartos2[(aux.mes) - 1][i]--;
+            }
+            user.RegistrarReservaHotel(*(it), inicio, fim, it->preco2, pessoas);
+        }
+        if (pessoas == 3)
+        {
+            aux.mes = inicio.mes;
+            for (int i = (inicio.dia - 1); i < it->quartos3[inicio.mes].size(); i++)
+            {
+                it->quartos3[(inicio.mes) - 1][i]--;
+            }
+            aux.mes++;
+            while (aux.mes < fim.mes)
+            {
+                for (int i = 0; i < it->quartos3[aux.mes].size(); i++)
+                {
+                    it->quartos3[(aux.mes) - 1][i]--;
+                }
+                aux.mes++;
+            }
+            for (int i = 0; i < fim.dia; i++)
+            {
+                it->quartos3[(aux.mes) - 1][i]--;
+            }
+            user.RegistrarReservaHotel(*(it), inicio, fim, it->preco3, pessoas);
+        }
+        if (pessoas == 4)
+        {
+            aux.mes = inicio.mes;
+            for (int i = (inicio.dia - 1); i < it->quartos4[inicio.mes].size(); i++)
+            {
+                it->quartos4[(inicio.mes) - 1][i]--;
+            }
+            aux.mes++;
+            while (aux.mes < fim.mes)
+            {
+                for (int i = 0; i < it->quartos4[aux.mes].size(); i++)
+                {
+                    it->quartos4[(aux.mes) - 1][i]--;
+                }
+                aux.mes++;
+            }
+            for (int i = 0; i < fim.dia; i++)
+            {
+                it->quartos4[(aux.mes) - 1][i]--;
+            }
+            user.RegistrarReservaHotel(*(it), inicio, fim, it->preco4, pessoas);
         }
     }
 }
 
-void ListaDeHoteis::CancelarReserva(list<Hotel>::iterator it, Usuario user)
+void ListaDeHoteis::CancelarReserva(list<Hotel>::iterator it, Data inicio, Data fim, Usuario user, int pessoas)
 {
+    if (inicio.mes == fim.mes)
+    {
+        if (pessoas == 2)
+        {
+            for (int i = (inicio.dia - 1); i < fim.dia; i++)
+            {
+                it->quartos2[(inicio.mes) - 1][i]++;
+            }
+            user.ReembolsarReservaHotel(*(it), inicio, fim, it->preco2, pessoas);
+        }
+        if (pessoas == 3)
+        {
+            for (int i = (inicio.dia - 1); i < fim.dia; i++)
+            {
+                it->quartos3[(inicio.mes) - 1][i]++;
+            }
+            user.ReembolsarReservaHotel(*(it), inicio, fim, it->preco3, pessoas);
+        }
+        if (pessoas == 4)
+        {
+            for (int i = (inicio.dia - 1); i < fim.dia; i++)
+            {
+                it->quartos4[(inicio.mes) - 1][i]++;
+            }
+            user.ReembolsarReservaHotel(*(it), inicio, fim, it->preco4, pessoas);
+        }
+    }
+    else
+    {
+        Data aux;
+        if (pessoas == 2)
+        {
+            aux.mes = inicio.mes;
+            for (int i = (inicio.dia - 1); i < it->quartos2[inicio.mes].size(); i++)
+            {
+                it->quartos2[(inicio.mes) - 1][i]++;
+            }
+            aux.mes++;
+            while (aux.mes < fim.mes)
+            {
+                for (int i = 0; i < it->quartos2[aux.mes].size(); i++)
+                {
+                    it->quartos2[(aux.mes) - 1][i]++;
+                }
+                aux.mes++;
+            }
+            for (int i = 0; i < fim.dia; i++)
+            {
+                it->quartos2[(aux.mes) - 1][i]++;
+            }
+            user.ReembolsarReservaHotel(*(it), inicio, fim, it->preco2, pessoas);
+        }
+        if (pessoas == 3)
+        {
+            aux.mes = inicio.mes;
+            for (int i = (inicio.dia - 1); i < it->quartos3[inicio.mes].size(); i++)
+            {
+                it->quartos3[(inicio.mes) - 1][i]++;
+            }
+            aux.mes++;
+            while (aux.mes < fim.mes)
+            {
+                for (int i = 0; i < it->quartos3[aux.mes].size(); i++)
+                {
+                    it->quartos3[(aux.mes) - 1][i]++;
+                }
+                aux.mes++;
+            }
+            for (int i = 0; i < fim.dia; i++)
+            {
+                it->quartos3[(aux.mes) - 1][i]++;
+            }
+            user.ReembolsarReservaHotel(*(it), inicio, fim, it->preco3, pessoas);
+        }
+        if (pessoas == 4)
+        {
+            aux.mes = inicio.mes;
+            for (int i = (inicio.dia - 1); i < it->quartos4[inicio.mes].size(); i++)
+            {
+                it->quartos4[(inicio.mes) - 1][i]++;
+            }
+            aux.mes++;
+            while (aux.mes < fim.mes)
+            {
+                for (int i = 0; i < it->quartos4[aux.mes].size(); i++)
+                {
+                    it->quartos4[(aux.mes) - 1][i]++;
+                }
+                aux.mes++;
+            }
+            for (int i = 0; i < fim.dia; i++)
+            {
+                it->quartos4[(aux.mes) - 1][i]++;
+            }
+            user.ReembolsarReservaHotel(*(it), inicio, fim, it->preco4, pessoas);
+        }
+    }
 }
 
 void ListaDeHoteis::Avaliar(list<Hotel>::iterator it, Usuario user, float avaliacao)
 {
+    if (avaliacao > 10.0)
+    {
+        // TODO: digite um valor válido
+    }
     float media = ((it->avaliacoes + avaliacao) / 2.0);
     it->avaliacoes = media;
 }
@@ -199,6 +436,7 @@ void ListaDeHoteis::Fechar()
         arquivo_ << x.preco2 << endl;
         arquivo_ << x.preco3 << endl;
         arquivo_ << x.preco4 << endl;
+        arquivo_ << endl;
     }
     arquivo_.close();
 }

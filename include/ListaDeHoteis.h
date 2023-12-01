@@ -37,18 +37,18 @@ class ListaDeHoteis
     // verifica se há disponibilidade na data desejada pelo usuário
     // (nós) no README ficou faltando a iterator
     // (nós) sugiro mudar o nome do método para disponibilidade
-    bool ConsultarCalendario(int dia, int mes, list<Hotel>::iterator it, int pessoas);
+    bool ConsultarCalendario(Data data, list<Hotel>::iterator it, int pessoas);
 
     // realiza a reserva, ou seja, diminui o número de vagas disponiveis
     // no periodo desejado e reduz a quantidade de créditos que o usuário
     // possui
     // pensar(nós) situação análoga à classe ListaDeVoos, nesse caso,
     // precisa de um método buscar que busque pelo nome
-    void Reservar(string data_inicio, string data_fim, list<Hotel>::iterator it, Usuario user, int pessoas);
+    void Reservar(Data inicio, Data fim, list<Hotel>::iterator it, Usuario user, int pessoas);
 
     // cancela a reserva, ou seja, reestabelece o número de vagas disponíveis
     // e devolve os créditos ao usuário
-    void CancelarReserva(list<Hotel>::iterator it, Usuario user);
+    void CancelarReserva(list<Hotel>::iterator it, Data chegada, Data partida, Usuario user, int pessoas);
 
     // permite que o usuário avalie o hotel
     void Avaliar(list<Hotel>::iterator it, Usuario user, float avaliacao);
@@ -59,6 +59,10 @@ class ListaDeHoteis
   private:
     list<Hotel> lista_;
     fstream arquivo_;
+};
+
+struct ExcecaoErroArquivoHoteis
+{
 };
 
 #endif

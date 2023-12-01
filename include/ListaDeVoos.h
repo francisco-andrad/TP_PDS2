@@ -10,15 +10,15 @@ using namespace std;
 
 struct FiltrosVoo
 {
-    string origem;
-    string destino;
+    //string origem;
+    //string destino;
     string data_partida;
     string hora_partida;
-    string data_chegada;
-    string hora_chegada;
+    //string data_chegada;
+    //string hora_chegada;
     string companhia;
-    float preco_economica;
-    float preco_executiva;
+    //float preco_economica;
+    //float preco_executiva;
 };
 
 class ListaDeVoos
@@ -55,6 +55,9 @@ class ListaDeVoos
   private:
     list<Voo> lista_;
     fstream arquivo_;
+};
+
+struct ExcecaoErroArquivoVoos {
 };
 
 #endif

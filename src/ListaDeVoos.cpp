@@ -13,7 +13,8 @@ void ListaDeVoos::Inicializar()
     arquivo_.open("data/Voos.txt", ios::in);
     if (!arquivo_.is_open())
     {
-        // TODO: throw excessão
+        ExcecaoErroArquivoVoos f;
+        throw f;
     }
     string buffer;
     Voo aux_leitura;
@@ -43,7 +44,7 @@ void ListaDeVoos::Inicializar()
         getline(arquivo_, buffer);
         aux_leitura.assentos_executiva = stoi(buffer);
         lista_.push_back(aux_leitura);
-        getline(arquivo_, buffer);
+        getline(arquivo_, buffer); // linha em branco que separa os voos
     }
     arquivo_.close();
 }
@@ -53,9 +54,8 @@ list<Voo>::iterator ListaDeVoos::Buscar(FiltrosVoo filtros)
     list<Voo>::iterator it;
     for (it = lista_.begin(); it != lista_.end(); it++)
     {
-        if ((it->origem == filtros.origem) && (it->destino == filtros.destino) &&
-            (it->data_partida == filtros.data_partida) && (it->data_chegada == filtros.data_chegada) &&
-            (it->companhia == filtros.companhia))
+        if ((it->origem == origem) && (it->destino == destino) && (it->data_partida == filtros.data_partida) &&
+            (it->data_chegada == filtros.hora_partida) && (it->companhia == filtros.companhia))
             return it;
     }
     if (it == lista_.end())
@@ -109,7 +109,8 @@ void ListaDeVoos::Fechar()
     arquivo_.open("data/Voos.txt", ios::out);
     if (!arquivo_.is_open())
     {
-        // TODO: throw excessão
+        ExcecaoErroArquivoVoos f;
+        throw f;
     }
     for (Voo x : lista_)
     {
@@ -125,6 +126,7 @@ void ListaDeVoos::Fechar()
         arquivo_ << x.preco_executiva << endl;
         arquivo_ << x.assentos_economica << endl;
         arquivo_ << x.assentos_executiva << endl;
+        arquivo_ << endl; // linha em branco separando
     }
     arquivo_.close();
 }
