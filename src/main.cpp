@@ -1,6 +1,8 @@
 #include "../include/ListaDeHoteis.h"
 #include "../include/ListaDeVoos.h"
+
 #include <iostream>
+
 using namespace std;
 
 int main(void)
@@ -44,45 +46,41 @@ int main(void)
     cin >> opcao;
 
     if (opcao == 1) {
-        FiltrosVoo fv;
+        //FiltrosVoo fv;
 
         cout << endl;
         cout << "Digite a cidade de origem (letras maiúsculas e minúsculas): " << endl;
-        cin >> fv.origem;
+        string origem;
+        cin >> origem;
         cout << "Digite a cidade de destino (letras maiúsculas e minúsculas): " << endl;
-        cin >> fv.destino;
-        cout << "Digite a data (apenas ida) (formato DD/MM/2024):" << endl;
-        cin >> fv.data_partida;
-
-        ldv.Buscar(fv); //Busca com base apenas na origem, destino e data para exibir todos os voos disponíveis na tela.
+        string destino;
+        cin >> destino;
+        cout << "(Passagens apenas para o ano de 2024)" << endl;
+        cout << "Digite o dia e o mês do voo (separados por espaços):" << endl;
+        Data datavoo;
+        cin >> datavoo.dia;
+        cin >> datavoo.mes;
 
         cout << "Estas são as opções: " << endl;
         cout << endl;
 
-        // Dar um cout aqui que imprima todos os voos encontrados na tela e suas especificações //
+        // COLOCAR AQUI A FUNÇÃO EXIBIR VOOS (ORIGEM, DESTINO, DATA)
 
         cout << endl;
 
+        cout << "Digite o código do voo que deseja (letras maiúsculas e minúsculas): " << endl;
+        string codigo;
+        cin >> codigo;
+        cout << "Deseja comprar a passagem econômica ou executiva? (Digite 1 para econômica ou 0 para executiva)" << endl;
+            bool eoue;
+            cin >> eoue;
 
-        if ( /* só foi retornado um voo */) {
-            cout << "Deseja comprar uma passagem para esse voo? (Digite S para SIM ou N para NÃO)" << endl;
+            cout << "Confirmar compra? (Digite S para SIM ou N para NÃO)" << endl;
             string soun;
             cin >> soun;
-
+            
             if (soun == "S" || soun == "s") {
-                cout << "Deseja comprar a passagem econômica ou executiva? (Digite 1 para econômica ou 2 para executiva)" << endl;
-                int eoue;
-                cin >> eoue;
-
-                if (eoue == 1) {
-                    ldv.Comprar(ldv.Buscar(fv), jao, true);
-                } else if (eoue == 2) {
-                    ldv.Comprar(ldv.Buscar(fv), jao, false);
-                } else if (eoue < 1 || eoue > 2) {
-                    ExcecaoOpcaoInvalida e;
-                    throw e;
-                }
-
+                ldv.Comprar(codigo, jao, eoue);
                 cout << endl;
                 cout << "Obrigado por comprar no ViagemExpress!" << endl;
                 cout << "Você será redirecionado ao Menu." << endl;
@@ -97,79 +95,31 @@ int main(void)
             } else if (!(soun == "S" || soun == "s" || soun == "N" || soun == "n")) {
                 ExcecaoOpcaoInvalida e;
                 throw e;
-            }
-            
-        } else {
-            cout << "Selecione um voo (digite as especificações do voo que deseja)." << endl;
-            cout << "Companhia aérea (letras maiúsculas e minúsculas): " << endl;
-            cin >> fv.companhia;
-            cout << "Horário da partida (formato 00:00): " << endl;
-            cin >> fv.hora_partida;
-            cout << endl;
-            ldv.Buscar(fv);
-
-            // Dar cout no voo que aparecer //
-
-            cout << endl;
-
-            cout << "Deseja comprar uma passagem para esse voo? (Digite S para SIM ou N para NÃO)" << endl;
-            string soun;
-            cin >> soun;
-
-            if (soun == "S" || soun == "s") {
-                cout << "Deseja comprar a passagem econômica ou executiva? (Digite 1 para econômica ou 2 para executiva)" << endl;
-                int eoue;
-                cin >> eoue;
-
-                if (eoue == 1) {
-                    ldv.Comprar(ldv.Buscar(fv), jao, true);
-                } else if (eoue == 2) {
-                    ldv.Comprar(ldv.Buscar(fv), jao, false);
-                } else if (eoue < 1 || eoue > 2) {
-                    ExcecaoOpcaoInvalida e;
-                    throw e;
-                }
-
-                cout << endl;
-                cout << "Obrigado por comprar no ViagemExpress!" << endl;
-                cout << "Você será redirecionado ao Menu." << endl;
-                cout << endl;
-                goto Menu;
-
-
-            } else if (soun == "N" || soun == "n") {
-                cout << "Você será redirecionado ao Menu." << endl;
-                cout << endl;
-                goto Menu;
-            } else if (!(soun == "S" || soun == "s" || soun == "N" || soun == "n")) {
-                ExcecaoOpcaoInvalida e;
-                throw e;
-            }
-        }
-
-
-            
+            }   
 
     } else if (opcao == 2) {
-        FiltrosHotel fh;
+        //FiltrosHotel fh;
 
         cout << endl;
         cout << "Digite a cidade em que você deseja se hospedar (letras maiúsculas e minúsculas): " << endl;
-        cin >> fh.local;
+        string cidade;
+        cin >> cidade;
         cout << "Estas são as opções: " << endl;
+        cout << endl;
 
-        // Dar um cout aqui com todas as opções de hotel da cidade escolhida.
+        // COLOCAR AQUI A FUNÇÃO EXIBIR HOTEIS (CIDADE)
 
         cout << endl;
 
         cout << "Digite o nome do hotel que deseja (letras maiúculas e minúsculas): " << endl;
-        cin >> fh.nome;
-        cout << "(Reserva para o ano de 2024.)" << endl;
-        cout << "Digite o dia e o mês da chegada ao hotel (separados por espaços): " << endl;
+        string nome;
+        cin >> nome;
+        cout << "(Reservas apenas para o ano de 2024)" << endl;
+        cout << "Digite o dia e o mês de chegada ao hotel (separados por espaços): " << endl;
         Data datachegada;
         cin >> datachegada.dia;
         cin >> datachegada.mes;
-        cout << "Digite o dia e o mês da saída do hotel (separados por espaços): " << endl;
+        cout << "Digite o dia e o mês de saída do hotel (separados por espaços): " << endl;
         Data datasaida;
         cin >> datasaida.dia;
         cin >> datasaida.mes;
@@ -177,11 +127,11 @@ int main(void)
         int pessoas;
         cin >> pessoas;
 
-        cout << "Deseja realizar a reserva? (Digite S para SIM ou N para NÃO)" << endl;
+        cout << "Confirmar reserva? (Digite S para SIM ou N para NÃO)" << endl;
         string soun;
         cin >> soun;
         if (soun == "S" || soun == "s") {
-            ldh.Reservar (datachegada, datasaida, ldh.Buscar(fh), jao, pessoas);
+            ldh.Reservar (nome, datachegada, datasaida, jao, pessoas);
             cout << endl;
             cout << "Obrigado por reservar no ViagemExpress!" << endl;
             cout << "Você será redirecionado ao Menu." << endl;
@@ -201,8 +151,20 @@ int main(void)
 
 
     } else if (opcao == 3) {
+        cout << endl;
+        // IMPLEMENTAR UMA FUNÇÃO QUE EXIBA TODOS OS VOOS
+        cout << endl;
+        cout << "Você será redirecionado ao Menu." << endl;
+        cout << endl;
+        goto Menu;
 
     } else if (opcao == 4) {
+        cout << endl;
+        // IMPLEMENTAR UMA FUNÇÃO QUE EXIBA TODOS OS HOTÉIS
+        cout << endl;
+        cout << "Você será redirecionado ao Menu." << endl;
+        cout << endl;
+        goto Menu;
 
     } else if (opcao == 5) {
         cout << endl;
@@ -215,10 +177,25 @@ int main(void)
         goto Menu;
 
     } else if (opcao == 6) {
+        cout << "Digite o código do voo que deseja cancelar a compra (letras maiúsculas e minúsculas): " << endl;
+        string codigo;
+        cin >> codigo;
+
+        ldv.CancelarCompra(codigo);  // PASSAR SÓ O CÓDIGO COMO PARÂMETRO PRA FACILITAR
+        
+        cout << "Cancelamento realizado com sucesso. Você foi reembolsado." << endl;
+        cout << "Você será redirecionado ao Menu." << endl;
+        cout << endl;
+        goto Menu;
 
     } else if (opcao == 7) {
 
     } else if (opcao == 8) {
+        // IMPLEMENTAR UMA FUNÇÃO QUE EXIBA O NOME, O SALDO, OS VOOS E AS RESERVAS DO USUÁRIO.
+
+        cout << "Você será redirecionado ao Menu." << endl;
+        cout << endl;
+        goto Menu;
 
     } else if (opcao == 9) {
         cout << endl;
