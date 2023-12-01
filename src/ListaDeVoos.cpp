@@ -54,8 +54,9 @@ list<Voo>::iterator ListaDeVoos::Buscar(FiltrosVoo filtros)
     list<Voo>::iterator it;
     for (it = lista_.begin(); it != lista_.end(); it++)
     {
-        if ((it->origem == filtros.origem) && (it->destino == filtros.destino) && (it->data_partida == filtros.data_partida) &&
-            (it->hora_partida == filtros.hora_partida) && (it->companhia == filtros.companhia))
+        if ((it->origem == filtros.origem) && (it->destino == filtros.destino) &&
+            (it->data_partida == filtros.data_partida) && (it->hora_partida == filtros.hora_partida) &&
+            (it->companhia == filtros.companhia))
             return it;
     }
     if (it == lista_.end())
@@ -64,7 +65,7 @@ list<Voo>::iterator ListaDeVoos::Buscar(FiltrosVoo filtros)
     }
 }
 
-void ListaDeVoos::Comprar(list<Voo>::iterator it, Usuario user, bool economica)
+void ListaDeVoos::Comprar(list<Voo>::iterator it, Usuario &user, bool economica)
 {
     if (((user.creditos() < it->preco_executiva) && (!economica)) ||
         ((user.creditos() < it->preco_economica) && economica))
@@ -83,7 +84,7 @@ void ListaDeVoos::Comprar(list<Voo>::iterator it, Usuario user, bool economica)
     }
 }
 
-void ListaDeVoos::CancelarCompra(list<Voo>::iterator it, Usuario user, bool economica)
+void ListaDeVoos::CancelarCompra(list<Voo>::iterator it, Usuario &user, bool economica)
 {
     if (!economica)
     {
@@ -97,7 +98,7 @@ void ListaDeVoos::CancelarCompra(list<Voo>::iterator it, Usuario user, bool econ
     }
 }
 
-void ListaDeVoos::Avaliar(list<Voo>::iterator it, Usuario user, float avaliacao)
+void ListaDeVoos::Avaliar(list<Voo>::iterator it, Usuario &user, float avaliacao)
 {
     // essa função é completamente inútil kkkkk vo tentar improvisar aqui
     // float media = ((avaliacao + it->avaliacao)/2.0);
