@@ -54,8 +54,8 @@ list<Voo>::iterator ListaDeVoos::Buscar(FiltrosVoo filtros)
     list<Voo>::iterator it;
     for (it = lista_.begin(); it != lista_.end(); it++)
     {
-        if ((it->origem == origem) && (it->destino == destino) && (it->data_partida == filtros.data_partida) &&
-            (it->data_chegada == filtros.hora_partida) && (it->companhia == filtros.companhia))
+        if ((it->origem == filtros.origem) && (it->destino == filtros.destino) && (it->data_partida == filtros.data_partida) &&
+            (it->hora_partida == filtros.hora_partida) && (it->companhia == filtros.companhia))
             return it;
     }
     if (it == lista_.end())

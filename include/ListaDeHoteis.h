@@ -17,6 +17,7 @@ struct FiltrosHotel
     bool cafe;
     bool almoco;
     bool jantar;
+    bool piscina;
     int quartos2;
     int quartos3;
     int quartos4;
