@@ -1,5 +1,6 @@
 #include "../include/Usuario.h"
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -85,18 +86,19 @@ void Usuario::RegistrarCompraPassagem(Voo voo, float preco, bool economica)
     creditos_ -= preco;
 }
 
-void Usuario::RegistrarReservaHotel(Hotel hotel, string data_chegada, string data_partida, float preco)
+void Usuario::RegistrarReservaHotel(Hotel hotel, Data chegada, Data partida, float preco, int pessoas)
 {
     // o código que testa se o usuario tem creditos o suficiente
     // para realizar a transação vai ficar na classe ListaDeHoteis
-    string aux_dados = "H" + hotel.nome + data_chegada + data_partida;
+    string aux_dados = "H" + hotel.nome + to_string(chegada.dia) + to_string(chegada.mes) + to_string(partida.dia) +
+                       to_string(partida.mes) + to_string(pessoas);
     hoteis_.push_back(aux_dados);
     creditos_ -= preco;
 }
 
 void Usuario::ReembolsarCompraPassagem(Voo voo, float preco, bool economica)
 {
-    // TODO: talvez colocar "x" ou "c" para diferenciar economica e executiva
+    // TODO: talvez colocar "x" ou "c" para diferenciar economica e executiva DONE
     string aux_dados;
     if (!economica)
         aux_dados = "P" + voo.numero + "X";
@@ -106,9 +108,10 @@ void Usuario::ReembolsarCompraPassagem(Voo voo, float preco, bool economica)
     creditos_ += preco;
 }
 
-void Usuario::ReembolsarReservaHotel(Hotel hotel, string data_chegada, string data_partida, float preco)
+void Usuario::ReembolsarReservaHotel(Hotel hotel, Data chegada, Data partida, float preco, int pessoas)
 {
-    string aux_dados = "H" + hotel.nome + data_chegada + data_partida;
+    string aux_dados = "H" + hotel.nome + to_string(chegada.dia) + to_string(chegada.mes) + to_string(partida.dia) +
+                       to_string(partida.mes) + to_string(pessoas);
     hoteis_.remove(aux_dados);
     creditos_ += preco;
 }
