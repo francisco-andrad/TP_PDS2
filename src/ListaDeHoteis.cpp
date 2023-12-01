@@ -129,7 +129,7 @@ bool ListaDeHoteis::ConsultarCalendario(Data d, list<Hotel>::iterator it, int pe
     return false;
 }
 
-void ListaDeHoteis::Reservar(Data inicio, Data fim, list<Hotel>::iterator it, Usuario user, int pessoas)
+void ListaDeHoteis::Reservar(Data inicio, Data fim, list<Hotel>::iterator it, Usuario &user, int pessoas)
 {
     if (((pessoas == 2) && (user.creditos() < it->preco2) || ((pessoas == 3) && (user.creditos() < it->preco3)) ||
          ((pessoas == 4) && (user.creditos() < it->preco4))))
@@ -279,7 +279,7 @@ void ListaDeHoteis::Reservar(Data inicio, Data fim, list<Hotel>::iterator it, Us
     }
 }
 
-void ListaDeHoteis::CancelarReserva(list<Hotel>::iterator it, Data inicio, Data fim, Usuario user, int pessoas)
+void ListaDeHoteis::CancelarReserva(list<Hotel>::iterator it, Data inicio, Data fim, Usuario &user, int pessoas)
 {
     if (inicio.mes == fim.mes)
     {
@@ -380,7 +380,7 @@ void ListaDeHoteis::CancelarReserva(list<Hotel>::iterator it, Data inicio, Data 
     }
 }
 
-void ListaDeHoteis::Avaliar(list<Hotel>::iterator it, Usuario user, float avaliacao)
+void ListaDeHoteis::Avaliar(list<Hotel>::iterator it, Usuario &user, float avaliacao)
 {
     if (avaliacao > 10.0)
     {

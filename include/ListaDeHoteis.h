@@ -45,14 +45,14 @@ class ListaDeHoteis
     // possui
     // pensar(nós) situação análoga à classe ListaDeVoos, nesse caso,
     // precisa de um método buscar que busque pelo nome
-    void Reservar(Data inicio, Data fim, list<Hotel>::iterator it, Usuario user, int pessoas);
+    void Reservar(Data inicio, Data fim, list<Hotel>::iterator it, Usuario &user, int pessoas);
 
     // cancela a reserva, ou seja, reestabelece o número de vagas disponíveis
     // e devolve os créditos ao usuário
-    void CancelarReserva(list<Hotel>::iterator it, Data chegada, Data partida, Usuario user, int pessoas);
+    void CancelarReserva(list<Hotel>::iterator it, Data chegada, Data partida, Usuario &user, int pessoas);
 
     // permite que o usuário avalie o hotel
-    void Avaliar(list<Hotel>::iterator it, Usuario user, float avaliacao);
+    void Avaliar(list<Hotel>::iterator it, Usuario &user, float avaliacao);
 
     // grava as informações no arquivo permanente e fecha o arquivo
     void Fechar();

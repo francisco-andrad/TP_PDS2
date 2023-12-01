@@ -14,11 +14,11 @@ struct FiltrosVoo
     string destino;
     string data_partida;
     string hora_partida;
-    //string data_chegada;
-    //string hora_chegada;
+    // string data_chegada;
+    // string hora_chegada;
     string companhia;
-    //float preco_economica;
-    //float preco_executiva;
+    // float preco_economica;
+    // float preco_executiva;
 };
 
 class ListaDeVoos
@@ -40,14 +40,14 @@ class ListaDeVoos
     // vale para a função CancelarCompra e Avaliar.
     // nesse caso, teria que ter um método buscar que use o número do voo
     // como critério, cai na parte de polimorfismo
-    void Comprar(list<Voo>::iterator it, Usuario user, bool economica);
+    void Comprar(list<Voo>::iterator it, Usuario &user, bool economica);
 
     // cancela a compra, ou seja, reestabelece o número de assentos disponiveis no
     // voo e a quantidade de créditos que o usuário possui
-    void CancelarCompra(list<Voo>::iterator it, Usuario user, bool economica);
+    void CancelarCompra(list<Voo>::iterator it, Usuario &user, bool economica);
 
     // permite que o usuário avalie um voo
-    void Avaliar(list<Voo>::iterator it, Usuario user, float avaliacao);
+    void Avaliar(list<Voo>::iterator it, Usuario &user, float avaliacao);
 
     // registra os dados no arquivo permanente e fecha o arquivo
     void Fechar();
@@ -57,7 +57,8 @@ class ListaDeVoos
     fstream arquivo_;
 };
 
-struct ExcecaoErroArquivoVoos {
+struct ExcecaoErroArquivoVoos
+{
 };
 
 #endif
