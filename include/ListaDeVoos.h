@@ -10,8 +10,8 @@ using namespace std;
 
 struct FiltrosVoo
 {
-    //string origem;
-    //string destino;
+    string origem;
+    string destino;
     string data_partida;
     string hora_partida;
     //string data_chegada;

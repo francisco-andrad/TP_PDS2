@@ -10,6 +10,8 @@ Usuario::Usuario()
 
 void Usuario::login(string nome, string senha)
 {
+    nome_ = nome;
+    senha_ = senha;
     string aux_abrir = "data/" + nome + ".txt";
     arquivo_.open(aux_abrir, ios::in);
     if (arquivo_.is_open())
@@ -65,7 +67,8 @@ void Usuario::AdicionarCreditos(float creditos)
 {
     if (creditos < 0.0)
     {
-        // TODO: throw excessão
+        ExcecaoValorInvalido h;
+        throw h;
     }
 
     creditos_ += creditos;

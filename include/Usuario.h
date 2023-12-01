@@ -90,8 +90,8 @@ class Usuario
     fstream arquivo_;
 };
 
-struct ExcecaoOpcaoInvalida
-{
-};
+struct ExcecaoOpcaoInvalida {};
+
+struct ExcecaoValorInvalido {};
 
 #endif
