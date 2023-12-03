@@ -1,5 +1,6 @@
 
 #include "../include/ListaDeVoos.h"
+#include <iostream>
 #include <string>
 
 using namespace std;
@@ -49,19 +50,66 @@ void ListaDeVoos::Inicializar()
     arquivo_.close();
 }
 
-list<Voo>::iterator ListaDeVoos::Buscar(FiltrosVoo filtros)
+list<Voo>::iterator ListaDeVoos::Buscar(string codigo)
 {
     list<Voo>::iterator it;
     for (it = lista_.begin(); it != lista_.end(); it++)
     {
-        if ((it->origem == filtros.origem) && (it->destino == filtros.destino) &&
-            (it->data_partida == filtros.data_partida) && (it->hora_partida == filtros.hora_partida) &&
-            (it->companhia == filtros.companhia))
+        if (it->numero == codigo)
             return it;
     }
     if (it == lista_.end())
     {
         // TODO: throw excessão
+    }
+}
+
+void ListaDeVoos::ExibirVoos(string origem, string destino, Data data)
+{
+    list<Voo>::iterator it;
+    string aux_data = to_string(data.dia) + "/" + to_string(data.mes) + "/2024";
+    for (it = lista_.begin(); it != lista_.end(); it++)
+    {
+        if ((it->origem == origem) && (it->destino == destino) && (it->data_partida == aux_data))
+        {
+            cout << "número do voo: " << it->numero << endl;
+            cout << "origem: " << it->origem << endl;
+            cout << "destino: " << it->destino << endl;
+            cout << "data de partida: " << it->data_partida << endl;
+            cout << "hora de partida: " << it->hora_partida << endl;
+            cout << "data de chegada: " << it->data_chegada << endl;
+            cout << "hora de chegada: " << it->hora_chegada << endl;
+            cout << "companhia: " << it->companhia << endl;
+            cout << "preço da classe econômica: " << it->preco_economica << endl;
+            cout << "preço da classe executiva: " << it->preco_executiva << endl;
+            cout << "assentos disponíveis na classe econômica: " << it->assentos_economica << endl;
+            cout << "assentos disponíveis na classe executiva: " << it->assentos_executiva << endl;
+            cout << endl;
+        }
+    }
+}
+
+void ListaDeVoos::Confirmar(string codigo)
+{
+    list<Voo>::iterator it;
+    for (it = lista_.begin(); it != lista_.end(); it++)
+    {
+        if (it->numero == codigo)
+        {
+            cout << "número do voo: " << it->numero << endl;
+            cout << "origem: " << it->origem << endl;
+            cout << "destino: " << it->destino << endl;
+            cout << "data de partida: " << it->data_partida << endl;
+            cout << "hora de partida: " << it->hora_partida << endl;
+            cout << "data de chegada: " << it->data_chegada << endl;
+            cout << "hora de chegada: " << it->hora_chegada << endl;
+            cout << "companhia: " << it->companhia << endl;
+            cout << "preço da classe econômica: " << it->preco_economica << endl;
+            cout << "preço da classe executiva: " << it->preco_executiva << endl;
+            cout << "assentos disponíveis na classe econômica: " << it->assentos_economica << endl;
+            cout << "assentos disponíveis na classe executiva: " << it->assentos_executiva << endl;
+            cout << endl;
+        }
     }
 }
 
