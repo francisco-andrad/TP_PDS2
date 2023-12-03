@@ -1,5 +1,5 @@
 #include "../include/ListaDeHoteis.h"
-#include <ostream>
+#include <iostream>
 #include <string>
 
 using namespace std;
@@ -99,18 +99,77 @@ void ListaDeHoteis::Inicializar()
     arquivo_.close();
 }
 
-list<Hotel>::iterator ListaDeHoteis::Buscar(FiltrosHotel filtros)
+list<Hotel>::iterator ListaDeHoteis::Buscar(string nome)
 {
     list<Hotel>::iterator it;
     for (it = lista_.begin(); it != lista_.end(); it++)
     {
-        if ((it->local == filtros.local) && (it->estrelas == filtros.estrelas) &&
-            (it->cafe == filtros.cafe)) // talvez pensar melhor nos filtros kkkkkkj
+        if (it->nome == nome)
             return it;
     }
     if (it == lista_.end())
     {
         // TODO: throw excessão
+    }
+}
+
+void ListaDeHoteis::ExibirHoteis(string cidade)
+{
+    list<Hotel>::iterator it;
+    int contador = 0;
+    for (it = lista_.begin(); it != lista_.end(); it++)
+    {
+        if (it->local == cidade)
+        {
+            cout << "nome do hotel: " << it->nome << endl;
+            cout << "localização: " << it->local << endl;
+            cout << "estrelas: " << it->estrelas << endl;
+            cout << "avaliações: " << it->avaliacoes << endl;
+            cout << "possui café da manha: sim = 1, não = 0: " << it->cafe << endl;
+            cout << "possui almoço: sim = 1, não = 0: " << it->almoco << endl;
+            cout << "possui jantar: sim = 1, não = 0: " << it->jantar << endl;
+            cout << "possui piscina: sim = 1, não = 0: " << it->piscina << endl;
+            cout << "preço do quarto para 2 pessoas: " << it->preco2 << endl;
+            cout << "preço do quarto para 3 pessoas: " << it->preco3 << endl;
+            cout << "preço do quarto paraa 4 pessoas: " << it->preco4 << endl;
+            cout << endl;
+            contador++;
+        }
+    }
+    if (contador == 0)
+    {
+        // TODO: throw excessão
+        // nenhum hotel encontrado
+    }
+}
+
+void ListaDeHoteis::Confirmar(string nome)
+{
+    list<Hotel>::iterator it;
+    int contador = 0;
+    for (it = lista_.begin(); it != lista_.end(); it++)
+    {
+        if (it->nome == nome)
+        {
+            cout << "nome do hotel: " << it->nome << endl;
+            cout << "localização: " << it->local << endl;
+            cout << "estrelas: " << it->estrelas << endl;
+            cout << "avaliações: " << it->avaliacoes << endl;
+            cout << "possui café da manha: sim = 1, não = 0: " << it->cafe << endl;
+            cout << "possui almoço: sim = 1, não = 0: " << it->almoco << endl;
+            cout << "possui jantar: sim = 1, não = 0: " << it->jantar << endl;
+            cout << "possui piscina: sim = 1, não = 0: " << it->piscina << endl;
+            cout << "preço do quarto para 2 pessoas: " << it->preco2 << endl;
+            cout << "preço do quarto para 3 pessoas: " << it->preco3 << endl;
+            cout << "preço do quarto paraa 4 pessoas: " << it->preco4 << endl;
+            cout << endl;
+            contador = 1;
+        }
+    }
+    if (contador == 0)
+    {
+        // TODO: throw excessão
+        // nenhum hotel encontrado
     }
 }
 
@@ -129,7 +188,7 @@ bool ListaDeHoteis::ConsultarCalendario(Data d, list<Hotel>::iterator it, int pe
     return false;
 }
 
-void ListaDeHoteis::Reservar(Data inicio, Data fim, list<Hotel>::iterator it, Usuario &user, int pessoas)
+void ListaDeHoteis::Reservar(list<Hotel>::iterator it, Data inicio, Data fim, Usuario &user, int pessoas)
 {
     if (((pessoas == 2) && (user.creditos() < it->preco2) || ((pessoas == 3) && (user.creditos() < it->preco3)) ||
          ((pessoas == 4) && (user.creditos() < it->preco4))))

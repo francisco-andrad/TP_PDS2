@@ -60,13 +60,14 @@ list<Voo>::iterator ListaDeVoos::Buscar(string codigo)
     }
     if (it == lista_.end())
     {
-        // TODO: throw excessão
+        // TODO: throw exceção
     }
 }
 
 void ListaDeVoos::ExibirVoos(string origem, string destino, Data data)
 {
     list<Voo>::iterator it;
+    int contador = 0;
     string aux_data = to_string(data.dia) + "/" + to_string(data.mes) + "/2024";
     for (it = lista_.begin(); it != lista_.end(); it++)
     {
@@ -85,13 +86,20 @@ void ListaDeVoos::ExibirVoos(string origem, string destino, Data data)
             cout << "assentos disponíveis na classe econômica: " << it->assentos_economica << endl;
             cout << "assentos disponíveis na classe executiva: " << it->assentos_executiva << endl;
             cout << endl;
+            contador++;
         }
+    }
+    if (contador == 0)
+    {
+        // TODO: throw exceção
+        // nenhum voo encontrado
     }
 }
 
 void ListaDeVoos::Confirmar(string codigo)
 {
     list<Voo>::iterator it;
+    int contador = 0;
     for (it = lista_.begin(); it != lista_.end(); it++)
     {
         if (it->numero == codigo)
@@ -109,7 +117,13 @@ void ListaDeVoos::Confirmar(string codigo)
             cout << "assentos disponíveis na classe econômica: " << it->assentos_economica << endl;
             cout << "assentos disponíveis na classe executiva: " << it->assentos_executiva << endl;
             cout << endl;
+            contador = 1;
         }
+    }
+    if (contador == 0)
+    {
+        // TODO: throw exceção
+        // nenhum voo encontrado
     }
 }
 

@@ -126,6 +126,10 @@ int main(void)
 
             cout << "Digite o nome do hotel que deseja (letras maiúculas e minúsculas): " << endl;
             string nome;
+
+            // TODO: colocar aqui a função Confirmar(nome)
+            // exibe só as informações do hotel desejado
+
             cin >> nome;
             cout << "(Reservas apenas para o ano de 2024)" << endl;
             cout << "Digite o dia e o mês de chegada ao hotel (separados por espaços): " << endl;
@@ -145,7 +149,7 @@ int main(void)
             cin >> soun;
             if (soun == "S" || soun == "s")
             {
-                ldh.Reservar(nome, datachegada, datasaida, jao, pessoas);
+                ldh.Reservar(ldh.Buscar(nome), datachegada, datasaida, jao, pessoas);
                 cout << endl;
                 cout << "Obrigado por reservar no ViagemExpress!" << endl;
                 cout << "Você será redirecionado ao Menu." << endl;
