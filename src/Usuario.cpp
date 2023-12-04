@@ -99,14 +99,14 @@ void Usuario::RegistrarReservaHotel(Hotel hotel, Data chegada, Data partida, flo
     creditos_ -= preco;
 }
 
-void Usuario::ReembolsarCompraPassagem(Voo voo, float preco, bool economica)
+void Usuario::ReembolsarCompraPassagem(string codigo, float preco, bool economica)
 {
     // TODO: talvez colocar "x" ou "c" para diferenciar economica e executiva DONE
     string aux_dados;
     if (!economica)
-        aux_dados = "P" + voo.numero + "X";
+        aux_dados = "P" + codigo + "X";
     else
-        aux_dados = "P" + voo.numero + "E";
+        aux_dados = "P" + codigo + "C";
     passagens_.remove(aux_dados);
     creditos_ += preco;
 }

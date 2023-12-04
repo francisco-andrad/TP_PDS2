@@ -69,7 +69,7 @@ class Usuario
 
     // remove do arquivo do usuário o registro de determinado voo e
     // devolve os créditos gastos
-    void ReembolsarCompraPassagem(Voo voo, float preco, bool economica);
+    void ReembolsarCompraPassagem(string codigo, float preco, bool economica);
 
     // remove do arquivo do ususário o registro de determinada reserva e
     // devolve os créditos gastos

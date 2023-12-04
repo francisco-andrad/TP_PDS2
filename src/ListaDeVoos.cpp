@@ -150,12 +150,12 @@ void ListaDeVoos::CancelarCompra(list<Voo>::iterator it, Usuario &user, bool eco
 {
     if (!economica)
     {
-        user.ReembolsarCompraPassagem(*(it), it->preco_executiva, false);
+        user.ReembolsarCompraPassagem(it->numero, it->preco_executiva, false);
         it->assentos_executiva++;
     }
     else
     {
-        user.ReembolsarCompraPassagem(*(it), it->preco_economica, true);
+        user.ReembolsarCompraPassagem(it->numero, it->preco_economica, true);
         it->assentos_economica++;
     }
 }

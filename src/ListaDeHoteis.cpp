@@ -1,5 +1,7 @@
 #include "../include/ListaDeHoteis.h"
+#include <cstdio>
 #include <iostream>
+#include <sstream>
 #include <string>
 
 using namespace std;
@@ -16,10 +18,9 @@ void ListaDeHoteis::Inicializar()
         // TODO: throw excessão
     }
     string buffer;
-    Hotel aux_leitura;
-    string aux_data = "";
     while (getline(arquivo_, buffer))
     {
+        Hotel aux_leitura;
         aux_leitura.nome = buffer;
         getline(arquivo_, buffer);
         aux_leitura.local = buffer;
@@ -35,57 +36,76 @@ void ListaDeHoteis::Inicializar()
         aux_leitura.jantar = stoi(buffer);
         getline(arquivo_, buffer);
         aux_leitura.piscina = stoi(buffer);
+        // cout << "cheguei até aqui\n";
+        // novo
 
-        // a partir daqui tem que alterar
+        stringstream ss;
+        string aux_data;
+        vector<string> tokens;
+        int num_vagas;
+        vector<int> v_mes;
+        // cout << "cheguei até aqui\n"; DEBUG
         for (int i = 0; i < 12; i++)
         {
             getline(arquivo_, buffer);
-            for (int j = 0; j < buffer.size(); j++)
+            ss = stringstream(buffer);
+            // cout << buffer << "2" << endl; DEBUG
+            while (ss >> aux_data)
             {
-                if (buffer[j] == ' ') // aqui
-                {
-                    aux_leitura.quartos2[i].push_back(stoi(aux_data));
-                    aux_data = "";
-                }
-                else
-                {
-                    aux_data.append(1, buffer[j]);
-                }
+                tokens.push_back(aux_data);
+                // cout << aux_data << " "; DEBUG
             }
+            ss.clear();
+            for (int j = 0; j < tokens.size(); j++)
+            {
+                num_vagas = stoi(tokens[j]);
+                v_mes.push_back(num_vagas);
+            }
+            tokens.clear();
+            aux_leitura.quartos2.push_back(v_mes);
+            v_mes.clear();
         }
         for (int i = 0; i < 12; i++)
         {
             getline(arquivo_, buffer);
-            for (int j = 0; j < buffer.size(); j++)
+            ss = stringstream(buffer);
+            // cout << buffer << "3" << endl; DEBUG
+            while (ss >> aux_data)
             {
-                if (buffer[j] == ' ')
-                {
-                    aux_leitura.quartos3[i].push_back(stoi(aux_data));
-                    aux_data = "";
-                }
-                else
-                {
-                    aux_data.append(1, buffer[j]);
-                }
+                tokens.push_back(aux_data);
+                // cout << aux_data << " "; DEBUG
             }
+            ss.clear();
+            for (int j = 0; j < tokens.size(); j++)
+            {
+                num_vagas = stoi(tokens[j]);
+                v_mes.push_back(num_vagas);
+            }
+            tokens.clear();
+            aux_leitura.quartos3.push_back(v_mes);
+            v_mes.clear();
+        }
+        for (int i = 0; i < 12; i++)
+        {
+            getline(arquivo_, buffer);
+            ss = stringstream(buffer);
+            // cout << buffer << "4" << endl; DEBUG
+            while (ss >> aux_data)
+            {
+                tokens.push_back(aux_data);
+                // cout << aux_data << " "; DEBUG
+            }
+            ss.clear();
+            for (int j = 0; j < tokens.size(); j++)
+            {
+                num_vagas = stoi(tokens[j]);
+                v_mes.push_back(num_vagas);
+            }
+            tokens.clear();
+            aux_leitura.quartos4.push_back(v_mes);
+            v_mes.clear();
         }
 
-        for (int i = 0; i < 12; i++)
-        {
-            getline(arquivo_, buffer);
-            for (int j = 0; j < buffer.size(); j++)
-            {
-                if (buffer[j] == ' ')
-                {
-                    aux_leitura.quartos4[i].push_back(stoi(aux_data));
-                    aux_data = "";
-                }
-                else
-                {
-                    aux_data.append(1, buffer[j]);
-                }
-            }
-        }
         getline(arquivo_, buffer);
         aux_leitura.preco2 = stof(buffer);
         getline(arquivo_, buffer);
@@ -97,6 +117,7 @@ void ListaDeHoteis::Inicializar()
         lista_.push_back(aux_leitura);
     }
     arquivo_.close();
+    // DONE: a leitura tá pronta
 }
 
 list<Hotel>::iterator ListaDeHoteis::Buscar(string nome)
@@ -467,28 +488,27 @@ void ListaDeHoteis::Fechar()
         arquivo_ << x.almoco << endl;
         arquivo_ << x.jantar << endl;
         arquivo_ << x.piscina << endl;
-
         for (int i = 0; i < 12; i++)
         {
-            for (int j = 0; j < x.quartos2[i].size(); i++)
+            for (int l : x.quartos2[i])
             {
-                arquivo_ << x.quartos2[i][j] << " ";
+                arquivo_ << l << " ";
             }
             arquivo_ << endl;
         }
         for (int i = 0; i < 12; i++)
         {
-            for (int j = 0; j < x.quartos3[i].size(); i++)
+            for (int l : x.quartos3[i])
             {
-                arquivo_ << x.quartos3[i][j] << " ";
+                arquivo_ << l << " ";
             }
             arquivo_ << endl;
         }
         for (int i = 0; i < 12; i++)
         {
-            for (int j = 0; j < x.quartos4[i].size(); i++)
+            for (int l : x.quartos4[i])
             {
-                arquivo_ << x.quartos4[i][j] << " ";
+                arquivo_ << l << " ";
             }
             arquivo_ << endl;
         }

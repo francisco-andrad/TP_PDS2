@@ -204,7 +204,11 @@ int main(void)
             string codigo;
             cin >> codigo;
 
-            ldv.CancelarCompra(codigo); // PASSAR SÓ O CÓDIGO COMO PARÂMETRO PRA FACILITAR
+            ldv.CancelarCompra(ldv.Buscar(codigo), user,
+                               econ_ou_exec); // PASSAR SÓ O CÓDIGO COMO PARÂMETRO PRA FACILITAR
+            // Não tem como, precisa da classe também. O usuário pode comprar uma passagem econômica
+            // e uma executiva no mesmo voo, nada impede. E ele pode querer cancelar só uma das duas
+            // também precisa do usuário
 
             cout << "Cancelamento realizado com sucesso. Você foi reembolsado." << endl;
             cout << "Você será redirecionado ao Menu." << endl;
