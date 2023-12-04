@@ -1,7 +1,11 @@
 #include "../include/ListaDeHoteis.h"
 #include "../include/ListaDeVoos.h"
 
+#include <cstddef>
+#include <cstdio>
 #include <iostream>
+#include <stdexcept>
+#include <string>
 
 using namespace std;
 
@@ -47,24 +51,25 @@ int main(void)
 
         int opcao;
         cin >> opcao;
-
+        string aux;
         if (opcao == 1)
         {
             // FiltrosVoo fv;
-
             cout << endl;
             cout << "Digite a cidade de origem (letras maiúsculas e minúsculas): " << endl;
+            setbuf(stdin, NULL);
             string origem;
-            cin >> origem;
-            cout << "Digite a cidade de destino (letras maiúsculas e minúsculas): " << endl;
-            string destino;
-            cin >> destino;
+            getline(cin, origem);
+            cout << "origem:" << origem;
             cout << "(Passagens apenas para o ano de 2024)" << endl;
             cout << "Digite o dia e o mês do voo (separados por espaços):" << endl;
             Data datavoo;
             cin >> datavoo.dia;
             cin >> datavoo.mes;
-
+            setbuf(stdin, NULL);
+            cout << "Digite a cidade de destino (letras maiúsculas e minúsculas): " << endl;
+            string destino;
+            getline(cin, destino, '\n');
             cout << "Estas são as opções: " << endl;
             cout << endl;
 
@@ -74,6 +79,7 @@ int main(void)
             cout << endl;
 
             cout << "Digite o código do voo que deseja (letras maiúsculas e minúsculas): " << endl;
+            setbuf(stdin, NULL);
             string codigo;
             cin >> codigo;
 
@@ -85,10 +91,12 @@ int main(void)
                  << endl;
             bool eoue;
             cin >> eoue;
+            // cin >> lixo;
 
             cout << "Confirmar compra? (Digite S para SIM ou N para NÃO)" << endl;
             string soun;
             cin >> soun;
+            // cin >> lixo;
 
             if (soun == "S" || soun == "s")
             {
@@ -118,7 +126,8 @@ int main(void)
             cout << endl;
             cout << "Digite a cidade em que você deseja se hospedar (letras maiúsculas e minúsculas): " << endl;
             string cidade;
-            cin >> cidade;
+            setbuf(stdin, NULL);
+            getline(cin, cidade);
             cout << "Estas são as opções: " << endl;
             cout << endl;
 
@@ -129,7 +138,8 @@ int main(void)
 
             cout << "Digite o nome do hotel que deseja (letras maiúculas e minúsculas): " << endl;
             string nome;
-            cin >> nome;
+            setbuf(stdin, NULL);
+            getline(cin, nome);
             // TODO: colocar aqui a função Confirmar(nome)
             // exibe só as informações do hotel desejado
             // DONE:
@@ -151,6 +161,7 @@ int main(void)
                 // TODO: número de pessoas inválido
             }
             cout << "Confirmar reserva? (Digite S para SIM ou N para NÃO)" << endl;
+            setbuf(stdin, NULL);
             string soun;
             cin >> soun;
             if (soun == "S" || soun == "s")
@@ -232,7 +243,8 @@ int main(void)
         {
             cout << "Digite o nome do hotel que deseja cancelar a reserva (letras maiúculas e minúsculas):" << endl;
             string nome;
-            cin >> nome;
+            setbuf(stdin, NULL);
+            getline(cin, nome);
             cout << "Digite o dia e o mês do iníco da reserva, separados por espaço:" << endl;
             Data inicio;
             cin >> inicio.dia;
@@ -243,11 +255,11 @@ int main(void)
             cin >> fim.mes;
             cout << "Digite o número de pessoas (2, 3 ou 4) para o qual o quarto estava reservado" << endl;
             int pessoas;
+            cin >> pessoas;
             if ((pessoas < 2) || (pessoas > 4))
             {
                 // TODO: opção inválida
             }
-            cin >> pessoas;
             ldh.CancelarReserva(ldh.Buscar(nome), inicio, fim, jao, pessoas);
             cout << "Cancelamento realizado com sucesso. Você foi reembolsado." << endl;
             cout << "Você será redirecionado ao Menu." << endl;
@@ -296,17 +308,26 @@ int main(void)
     catch (ExcecaoOpcaoInvalida e)
     {
         cout << "Opção inválida." << endl;
+        // TODO: se possível, voltar ao menu, ou pelo menos fechar os arquivos;
     }
     catch (ExcecaoErroArquivoVoos f)
     {
-        cout << "Erro ao abrir o arquivo Voos.txt." << endl;
+        cout << "Erro ao consultar o banco de dados de voos" << endl;
+        // TODO: se possível, voltar ao menu, ou pelo menos fechar os arquivos;
     }
     catch (ExcecaoErroArquivoHoteis g)
     {
-        cout << "Erro ao abrir o arquivo Hoteis.txt." << endl;
+        cout << "Erro ao consultar o banco de dados de hotéis" << endl;
+        // TODO: se possível, voltar ao menu, ou pelo menos fechar os arquivos;
     }
     catch (ExcecaoValorInvalido h)
     {
         cout << "Valor inválido" << endl;
+        // TODO: se possível, voltar ao menu, ou pelo menos fechar os arquivos;
+    }
+    catch (invalid_argument)
+    {
+        cout << "Erro na leitura do banco de dados" << endl;
+        // TODO: se possível, voltar ao menu, ou pelo menos fechar os arquivos;
     }
 }

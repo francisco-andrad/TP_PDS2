@@ -26,8 +26,8 @@ void Usuario::login(string nome, string senha)
         senha_ = senha;
         nome_ = nome;
         string aux_creitos;
-        getline(arquivo_, aux_creitos);
-        creditos_ = stof(aux_creitos);
+        if (getline(arquivo_, aux_creitos))
+            creditos_ = stof(aux_creitos);
         // cout << creditos_ << endl << senha_ << endl; DEBUG
         string aux_passagens;
         while (getline(arquivo_, aux_passagens))
