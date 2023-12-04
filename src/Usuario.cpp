@@ -1,5 +1,6 @@
 #include "../include/Usuario.h"
 #include <iostream>
+#include <ostream>
 #include <string>
 
 using namespace std;
@@ -65,7 +66,7 @@ void Usuario::login(string nome, string senha)
 
 void Usuario::AdicionarCreditos(float creditos)
 {
-    if (creditos < 0.0)
+    if ((creditos < 0.0) || (creditos > 100000.0))
     {
         ExcecaoValorInvalido h;
         throw h;
@@ -123,6 +124,25 @@ float Usuario::creditos()
 {
     return creditos_;
 }
+
+void Usuario::ExibirDados()
+{
+    cout << "nome: " << nome_ << endl;
+    cout << "senha: " << senha_ << endl;
+    cout << "créditos: " << creditos_ << endl;
+    cout << "passagens reservadas: formato  P<número do voo><C para econômica ou X para executiva" << endl;
+    for (string x : passagens_)
+    {
+        cout << x << endl;
+    }
+    cout << "hotéis reservados: formato H<nome do hotel><data de chegada e saída><número de pessoas por quarto>"
+         << endl;
+    for (string x : hoteis_)
+    {
+        cout << x << endl;
+    }
+}
+
 void Usuario::logoff()
 {
 

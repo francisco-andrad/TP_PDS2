@@ -39,6 +39,9 @@ class ListaDeHoteis
     // Exibe na tela todos os hoteis disponíves no local pesquisado
     void ExibirHoteis(string local);
 
+    // Exibe TODOS os hoteis disponíveis
+    void ExibirTodos();
+
     // Exibe na tela somente o hotel desejado para que o usuário possa conferir
     // as informações
     void Confirmar(string nome);

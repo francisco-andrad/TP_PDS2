@@ -75,6 +75,9 @@ class Usuario
     // devolve os créditos gastos
     void ReembolsarReservaHotel(Hotel hotel, Data chegada, Data partida, float preco, int pessoas);
 
+    // Exibe os dados do usuário
+    void ExibirDados();
+
     // retorna a quantidade de créditos disponiveis
     float creditos();
 

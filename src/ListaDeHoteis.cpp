@@ -164,6 +164,26 @@ void ListaDeHoteis::ExibirHoteis(string cidade)
     }
 }
 
+void ListaDeHoteis::ExibirTodos()
+{
+    list<Hotel>::iterator it;
+    for (it = lista_.begin(); it != lista_.end(); it++)
+    {
+        cout << "nome do hotel: " << it->nome << endl;
+        cout << "localização: " << it->local << endl;
+        cout << "estrelas: " << it->estrelas << endl;
+        cout << "avaliações: " << it->avaliacoes << endl;
+        cout << "possui café da manha: sim = 1, não = 0: " << it->cafe << endl;
+        cout << "possui almoço: sim = 1, não = 0: " << it->almoco << endl;
+        cout << "possui jantar: sim = 1, não = 0: " << it->jantar << endl;
+        cout << "possui piscina: sim = 1, não = 0: " << it->piscina << endl;
+        cout << "preço do quarto para 2 pessoas: " << it->preco2 << endl;
+        cout << "preço do quarto para 3 pessoas: " << it->preco3 << endl;
+        cout << "preço do quarto paraa 4 pessoas: " << it->preco4 << endl;
+        cout << endl;
+    }
+}
+
 void ListaDeHoteis::Confirmar(string nome)
 {
     list<Hotel>::iterator it;

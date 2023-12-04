@@ -38,6 +38,9 @@ class ListaDeVoos
     // necessidades do usuário
     void ExibirVoos(string origem, string destino, Data data);
 
+    // Exibe TODOS os voos disponíveis
+    void ExibirTodos();
+
     // exibe na tela as informações do voo que o usuário pretende comprar
     void Confirmar(string codigo);
 

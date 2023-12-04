@@ -69,7 +69,8 @@ int main(void)
             cout << endl;
 
             // COLOCAR AQUI A FUNÇÃO EXIBIR VOOS (ORIGEM, DESTINO, DATA)
-
+            // DONE:
+            ldv.ExibirVoos(origem, destino, datavoo);
             cout << endl;
 
             cout << "Digite o código do voo que deseja (letras maiúsculas e minúsculas): " << endl;
@@ -78,7 +79,8 @@ int main(void)
 
             // TODO: colocar aqui a função confirmar (código)
             // exibe as informações do voo desejado
-
+            // DONE:
+            ldv.Confirmar(codigo);
             cout << "Deseja comprar a passagem econômica ou executiva? (Digite 1 para econômica ou 0 para executiva)"
                  << endl;
             bool eoue;
@@ -121,16 +123,17 @@ int main(void)
             cout << endl;
 
             // COLOCAR AQUI A FUNÇÃO EXIBIR HOTEIS (CIDADE)
-
+            // DONE:
+            ldh.ExibirHoteis(cidade);
             cout << endl;
 
             cout << "Digite o nome do hotel que deseja (letras maiúculas e minúsculas): " << endl;
             string nome;
-
+            cin >> nome;
             // TODO: colocar aqui a função Confirmar(nome)
             // exibe só as informações do hotel desejado
-
-            cin >> nome;
+            // DONE:
+            ldh.Confirmar(nome);
             cout << "(Reservas apenas para o ano de 2024)" << endl;
             cout << "Digite o dia e o mês de chegada ao hotel (separados por espaços): " << endl;
             Data datachegada;
@@ -143,7 +146,10 @@ int main(void)
             cout << "Será um quarto para 2, 3 ou 4 pessoas? (Digite 2, 3 ou 4)" << endl;
             int pessoas;
             cin >> pessoas;
-
+            if ((pessoas > 4) || (pessoas < 2))
+            {
+                // TODO: número de pessoas inválido
+            }
             cout << "Confirmar reserva? (Digite S para SIM ou N para NÃO)" << endl;
             string soun;
             cin >> soun;
@@ -172,6 +178,8 @@ int main(void)
         {
             cout << endl;
             // IMPLEMENTAR UMA FUNÇÃO QUE EXIBA TODOS OS VOOS
+            // DONE:
+            ldv.ExibirTodos();
             cout << endl;
             cout << "Você será redirecionado ao Menu." << endl;
             cout << endl;
@@ -181,6 +189,8 @@ int main(void)
         {
             cout << endl;
             // IMPLEMENTAR UMA FUNÇÃO QUE EXIBA TODOS OS HOTÉIS
+            // DONE:
+            ldh.ExibirTodos();
             cout << endl;
             cout << "Você será redirecionado ao Menu." << endl;
             cout << endl;
@@ -189,7 +199,7 @@ int main(void)
         else if (opcao == 5)
         {
             cout << endl;
-            cout << "Atualmente você possui R$" << jao.creditos()
+            cout << "Atualmente você possui R$" << jao.creditos() // por que sem centavos?
                  << " de saldo. Quanto deseja adicionar? Digite o valor (sem centavos): " << endl;
             float valor;
             cin >> valor;
@@ -203,9 +213,12 @@ int main(void)
             cout << "Digite o código do voo que deseja cancelar a compra (letras maiúsculas e minúsculas): " << endl;
             string codigo;
             cin >> codigo;
-
-            ldv.CancelarCompra(ldv.Buscar(codigo), user,
-                               econ_ou_exec); // PASSAR SÓ O CÓDIGO COMO PARÂMETRO PRA FACILITAR
+            cout << "Qual é a classe da passagem que deseja cancelar? Digite 1 para econômica ou 0 para executiva:"
+                 << endl;
+            bool econ_ou_exec;
+            cin >> econ_ou_exec;
+            ldv.CancelarCompra(ldv.Buscar(codigo), jao, econ_ou_exec);
+            // PASSAR SÓ O CÓDIGO COMO PARÂMETRO PRA FACILITAR
             // Não tem como, precisa da classe também. O usuário pode comprar uma passagem econômica
             // e uma executiva no mesmo voo, nada impede. E ele pode querer cancelar só uma das duas
             // também precisa do usuário
@@ -217,11 +230,34 @@ int main(void)
         }
         else if (opcao == 7)
         {
+            cout << "Digite o nome do hotel que deseja cancelar a reserva (letras maiúculas e minúsculas):" << endl;
+            string nome;
+            cin >> nome;
+            cout << "Digite o dia e o mês do iníco da reserva, separados por espaço:" << endl;
+            Data inicio;
+            cin >> inicio.dia;
+            cin >> inicio.mes;
+            cout << "Digite o dia e o mês do final da reserva, separados por espaço:" << endl;
+            Data fim;
+            cin >> fim.dia;
+            cin >> fim.mes;
+            cout << "Digite o número de pessoas (2, 3 ou 4) para o qual o quarto estava reservado" << endl;
+            int pessoas;
+            if ((pessoas < 2) || (pessoas > 4))
+            {
+                // TODO: opção inválida
+            }
+            cin >> pessoas;
+            ldh.CancelarReserva(ldh.Buscar(nome), inicio, fim, jao, pessoas);
+            cout << "Cancelamento realizado com sucesso. Você foi reembolsado." << endl;
+            cout << "Você será redirecionado ao Menu." << endl;
+            goto Menu;
         }
         else if (opcao == 8)
         {
             // IMPLEMENTAR UMA FUNÇÃO QUE EXIBA O NOME, O SALDO, OS VOOS E AS RESERVAS DO USUÁRIO.
-
+            // DONE:
+            jao.ExibirDados();
             cout << "Você será redirecionado ao Menu." << endl;
             cout << endl;
             goto Menu;
