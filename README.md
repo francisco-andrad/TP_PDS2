@@ -8,6 +8,7 @@
 2. Dentro da pasta "TP_PDS2" que foi criada, crie uma nova pasta vazia com nome "obj".
 3. Para compilar, abra o terminal e digite "make".
 4. Para executar, digite "./main" no termianal.
+   
 (Todos os voos e hotéis são fictícios, usados apenas para teste do programa)
 
 
