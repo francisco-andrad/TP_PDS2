@@ -8,6 +8,7 @@
 
 using namespace std;
 
+// isso aqui ainda é util?
 struct FiltrosHotel
 {
     string nome;
@@ -33,7 +34,17 @@ class ListaDeHoteis
     void Inicializar();
 
     // Encontra um hotel de acordo com as preferências do usuário
-    list<Hotel>::iterator Buscar(FiltrosHotel filtros);
+    list<Hotel>::iterator Buscar(string nome);
+
+    // Exibe na tela todos os hoteis disponíves no local pesquisado
+    void ExibirHoteis(string local);
+
+    // Exibe TODOS os hoteis disponíveis
+    void ExibirTodos();
+
+    // Exibe na tela somente o hotel desejado para que o usuário possa conferir
+    // as informações
+    void Confirmar(string nome);
 
     // verifica se há disponibilidade na data desejada pelo usuário
     // (nós) no README ficou faltando a iterator
@@ -45,7 +56,7 @@ class ListaDeHoteis
     // possui
     // pensar(nós) situação análoga à classe ListaDeVoos, nesse caso,
     // precisa de um método buscar que busque pelo nome
-    void Reservar(Data inicio, Data fim, list<Hotel>::iterator it, Usuario &user, int pessoas);
+    void Reservar(list<Hotel>::iterator it, Data inicio, Data fim, Usuario &user, int pessoas);
 
     // cancela a reserva, ou seja, reestabelece o número de vagas disponíveis
     // e devolve os créditos ao usuário

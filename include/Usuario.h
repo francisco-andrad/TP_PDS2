@@ -69,11 +69,14 @@ class Usuario
 
     // remove do arquivo do usuário o registro de determinado voo e
     // devolve os créditos gastos
-    void ReembolsarCompraPassagem(Voo voo, float preco, bool economica);
+    void ReembolsarCompraPassagem(string codigo, float preco, bool economica);
 
     // remove do arquivo do ususário o registro de determinada reserva e
     // devolve os créditos gastos
     void ReembolsarReservaHotel(Hotel hotel, Data chegada, Data partida, float preco, int pessoas);
+
+    // Exibe os dados do usuário
+    void ExibirDados();
 
     // retorna a quantidade de créditos disponiveis
     float creditos();
@@ -90,8 +93,12 @@ class Usuario
     fstream arquivo_;
 };
 
-struct ExcecaoOpcaoInvalida {};
+struct ExcecaoOpcaoInvalida
+{
+};
 
-struct ExcecaoValorInvalido {};
+struct ExcecaoValorInvalido
+{
+};
 
 #endif

@@ -8,6 +8,7 @@
 
 using namespace std;
 
+// isso aqui ainda é útil?
 struct FiltrosVoo
 {
     string origem;
@@ -31,7 +32,17 @@ class ListaDeVoos
     void Inicializar();
 
     // encontra um voo de acordo com as necessidades do usuário
-    list<Voo>::iterator Buscar(FiltrosVoo filtros);
+    list<Voo>::iterator Buscar(string codigo);
+
+    // exibe todas as opções disponíveis de acordo com as
+    // necessidades do usuário
+    void ExibirVoos(string origem, string destino, Data data);
+
+    // Exibe TODOS os voos disponíveis
+    void ExibirTodos();
+
+    // exibe na tela as informações do voo que o usuário pretende comprar
+    void Confirmar(string codigo);
 
     // efetua a compra, ou seja, diminui a quantidade de assentos disponiveis no
     // voo e diminui a quantidade de créditos que o usuário possui

@@ -1,5 +1,6 @@
 #include "../include/Usuario.h"
 #include <iostream>
+#include <ostream>
 #include <string>
 
 using namespace std;
@@ -25,8 +26,8 @@ void Usuario::login(string nome, string senha)
         senha_ = senha;
         nome_ = nome;
         string aux_creitos;
-        getline(arquivo_, aux_creitos);
-        creditos_ = stof(aux_creitos);
+        if (getline(arquivo_, aux_creitos))
+            creditos_ = stof(aux_creitos);
         // cout << creditos_ << endl << senha_ << endl; DEBUG
         string aux_passagens;
         while (getline(arquivo_, aux_passagens))
@@ -65,7 +66,7 @@ void Usuario::login(string nome, string senha)
 
 void Usuario::AdicionarCreditos(float creditos)
 {
-    if (creditos < 0.0)
+    if ((creditos < 0.0) || (creditos > 100000.0))
     {
         ExcecaoValorInvalido h;
         throw h;
@@ -99,14 +100,14 @@ void Usuario::RegistrarReservaHotel(Hotel hotel, Data chegada, Data partida, flo
     creditos_ -= preco;
 }
 
-void Usuario::ReembolsarCompraPassagem(Voo voo, float preco, bool economica)
+void Usuario::ReembolsarCompraPassagem(string codigo, float preco, bool economica)
 {
     // TODO: talvez colocar "x" ou "c" para diferenciar economica e executiva DONE
     string aux_dados;
     if (!economica)
-        aux_dados = "P" + voo.numero + "X";
+        aux_dados = "P" + codigo + "X";
     else
-        aux_dados = "P" + voo.numero + "E";
+        aux_dados = "P" + codigo + "C";
     passagens_.remove(aux_dados);
     creditos_ += preco;
 }
@@ -123,6 +124,25 @@ float Usuario::creditos()
 {
     return creditos_;
 }
+
+void Usuario::ExibirDados()
+{
+    cout << "nome: " << nome_ << endl;
+    cout << "senha: " << senha_ << endl;
+    cout << "créditos: " << creditos_ << endl;
+    cout << "passagens reservadas: formato  P<número do voo><C para econômica ou X para executiva" << endl;
+    for (string x : passagens_)
+    {
+        cout << x << endl;
+    }
+    cout << "hotéis reservados: formato H<nome do hotel><data de chegada e saída><número de pessoas por quarto>"
+         << endl;
+    for (string x : hoteis_)
+    {
+        cout << x << endl;
+    }
+}
+
 void Usuario::logoff()
 {
 
