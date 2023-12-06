@@ -1,6 +1,17 @@
 # TP_PDS2
 **Sistema de Reserva de Passagens/Hotel**
 
+##### ViagemExpress
+
+*INSTRUÇÕES DE USO:*
+1. Clone esse repositório em sua máquina.
+2. Dentro da pasta "TP_PDS2" que foi criada, crie uma nova pasta vazia com nome "obj".
+3. Para compilar, abra o terminal e digite "make".
+4. Para executar, digite "./main" no termianal.
+   
+(Todos os voos e hotéis são fictícios, usados apenas para teste do programa)
+
+
 *Descrição do Projeto:*
 Como usuário, desejo consultar a disponibilidade de passagens aéreas de diferentes 
 origens para diferentes destinos e comprá-las caso seja de meu interesse. Além disso,
